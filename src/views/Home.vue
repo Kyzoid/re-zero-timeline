@@ -1,19 +1,19 @@
 <template>
   <div class="home container mx-auto">
-    <Timeline />
+    <TimelinesGraph />
     <EpisodeSelector />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import Timeline from '@/components/Timeline.vue';
+import TimelinesGraph from '@/components/TimelinesGraph.vue';
 import EpisodeSelector from '@/components/EpisodeSelector.vue';
 
 export default Vue.extend({
   name: 'Home',
   components: {
-    Timeline,
+    TimelinesGraph,
     EpisodeSelector,
   },
 });
