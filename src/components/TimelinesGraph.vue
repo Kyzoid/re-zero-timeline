@@ -1,17 +1,48 @@
 <template>
   <div class="timelines">
-    <div class="bg-gray-900 h-64 mb-2 py-4 pl-0 pr-8">
+    <div
+      id="timeline-graph"
+      class="bg-gray-900 h-64 mb-2 py-4 overflow-x-auto"
+    >
+      <Timeline data-timer="643" style="margin-left: 17%; max-width: calc(643 / 988 * 100%)">
+        <TimelineJoint joint-type="bottom" joint-height="96" />
+        <Event style="left: 5%" />
+        <Event style="left: 15%" />
+        <Event style="left: 90%" />
+        <DeathEvent />
+      </Timeline>
+      <Timeline data-timer="643" style="margin-left: 18%; max-width: calc(643 / 988 * 100%)">
+        <TimelineJoint joint-type="bottom" joint-height="72" />
+        <Event style="left: 5%" />
+        <Event style="left: 15%" />
+        <Event style="left: 90%" />
+        <DeathEvent />
+      </Timeline>
+      <Timeline data-timer="643" style="margin-left: 19%; max-width: calc(643 / 988 * 100%)">
+        <TimelineJoint joint-type="bottom" joint-height="48" />
+        <Event style="left: 5%" />
+        <Event style="left: 15%" />
+        <Event style="left: 90%" />
+        <DeathEvent />
+      </Timeline>
+      <Timeline data-timer="643" style="margin-left: 20%; max-width: calc(643 / 988 * 100%)">
+        <TimelineJoint joint-type="bottom" joint-height="24" />
+        <Event style="left: 5%" />
+        <Event style="left: 15%" />
+        <Event style="left: 90%" />
+        <DeathEvent />
+      </Timeline>
       <Timeline data-timer="643" style="max-width: calc(643 / 988 * 100%)">
         <Event style="left: 5%" />
         <Event style="left: 15%" />
         <Event style="left: 90%" />
         <DeathEvent />
       </Timeline>
-      <Timeline class="relative"
-      data-timer="800" style="background-position: 10% 0; max-width: calc(800 / 988 * 100%)">
-        <svg class="absolute" style="top: -1.25rem;" width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M18.2963 22C9.2961 22 2 12.1503 2 0" stroke="#4A5568" stroke-width="4"/>
-        </svg>
+      <Timeline
+        data-timer="800"
+        style="margin-left: 40%; max-width: calc(800 / 988 * 100%)"
+      >
+        <TimelineJoint joint-type="top" joint-height="24" />
         <Event style="left: 12%" />
         <Event style="left: 35%" />
         <Event style="left: 65%" />
@@ -41,6 +72,7 @@ import Vue from 'vue';
 import DeathEvent from './DeathEvent.vue';
 import Event from './Event.vue';
 import Timeline from './Timeline.vue';
+import TimelineJoint from './TimelineJoint.vue';
 
 class TimelineEvent {
   timeline: number;
@@ -81,6 +113,7 @@ export default Vue.extend({
     DeathEvent,
     Event,
     Timeline,
+    TimelineJoint,
   },
   data: () => ({
     timelineEvents: [
@@ -162,5 +195,17 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+  ::-webkit-scrollbar {
+    height: .5rem;
+  }
 
+  ::-webkit-scrollbar-track {
+    background-color: #151a24;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #2d3748;
+  }
 </style>

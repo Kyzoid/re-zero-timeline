@@ -1,6 +1,6 @@
 <template>
 <!-- eslint-disable max-len -->
-  <div class="death-event absolute cursor-pointer">
+  <div class="death-event absolute cursor-pointer pr-8">
     <svg
       version="1.1"
       id="Capa_1"
