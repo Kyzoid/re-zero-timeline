@@ -1,6 +1,6 @@
 <template>
 <!-- eslint-disable max-len -->
-  <div class="death-event absolute cursor-pointer pr-8">
+  <div class="death-event cursor-pointer pr-8">
     <svg
       version="1.1"
       id="Capa_1"
@@ -54,7 +54,7 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'DeathEvent',
+  name: 'DeathIcon',
 });
 </script>
 

@@ -1,0 +1,67 @@
+{
+  "timelines": [
+    {
+      "timeline": "1",
+      "absoluteTC": "0:00:00",
+      "timelineEvents": [
+        {
+          "type": "Event",
+          "eventTC": "0:02:00",
+          "episode": "1A",
+          "episodeRelativeTC": "0:02:00",
+          "description": "Subaru apparait devant la fontaine de Lugnica."
+        },
+        {
+          "type": "Event",
+          "eventTC": "0:05:30",
+          "episode": "1A",
+          "episodeRelativeTC": "0:05:30",
+          "description": "Subaru tombe sur les 3 bandits et Emilia le soigne."
+        },
+        {
+          "type": "Event",
+          "eventTC": "0:27:16",
+          "episode": "1B",
+          "episodeRelativeTC": "0:02:00",
+          "description": "Subaru laisse Emilia à l'entrée de la taverne de Rom et entre seul."
+        },
+        {
+          "type": "Death",
+          "eventTC": "0:28:44",
+          "episode": "1B",
+          "episodeRelativeTC": "0:04:16",
+          "description": "il meurt éventré par surprise par Elsa lorsqu'il rentre dans la taverne de Rom."
+        }
+      ]
+    },
+    {
+      "timeline": "2",
+      "absoluteTC": "0:31:16",
+      "timelineEvents": [
+        {
+          "type": "Event",
+          "eventTC": "0:01:44",
+          "episode": "1B",
+          "episodeRelativeTC": "0:06:00",
+          "description": "Subaru se presse de retrouver Emilia mais il tombe sur les 3 bandits. Il les défonce et va directement à la taverne."
+        },
+        {
+          "type": "Event",
+          "eventTC": "0:05:45",
+          "episode": "1B",
+          "episodeRelativeTC": "0:11:45",
+          "description": "Il rentre dans la taverne et négocie avec Rom, Felt et Elsa pour racheter l'insigne."
+        },
+        {
+          "type": "Death",
+          "eventTC": "0:10:53",
+          "episode": "1B",
+          "episodeRelativeTC": "0:22:38",
+
+          "absoluteTC": "0:47:54",
+          "description": "Les négociations échouent. Elsa tue Rom, Felt et Subaru."
+        }
+      ]
+    }
+  ]
+}
