@@ -1,14 +1,23 @@
 // TODO: Handle timeline position depending on jointDirection
 // TODO: RespawnEvent should be highlighted and be the starting point of multiple timelines
+// TODO: Implement Popper.js
 <template>
   <div class="timelines">
-    <div id="timeline-graph" class="bg-gray-900 h-64 mb-2 py-4 overflow-x-auto">
+    <div id="timeline-graph"
+    class="flex flex-col justify-center bg-gray-900 h-64 mb-2 py-4 overflow-x-auto">
       <Timeline
         v-for="timeline in computedTimelines"
         :key="timeline.events.timecode"
         :style="`margin-left:${timeline.position};
            width: ${timeline.width};`"
       >
+        <div
+          class="flex items-center justify-center
+          z-10 text-gray-500 bg-black bg-opacity-75
+          h-5 w-5"
+        >
+          <span class="text-xs">{{ timeline.id }}</span>
+        </div>
         <TimelineJoint
         :joint-direction="timeline.direction"
         :joint-complexity="timeline.complexity" />
@@ -17,6 +26,10 @@
           :key="event.timecode"
           :style="`left:${event.position};`"
           :type="event.type"
+          :timecode="event.timecode"
+          :episode="event.episode"
+          :episodeRelativeTC="event.episodeRelativeTC"
+          :description="event.description"
         >
         </Event>
       </Timeline>
@@ -70,6 +83,39 @@ export default Vue.extend({
     lengthInSeconds: 59304,
     timelines: [
       {
+        id: 3,
+        startAt: '00:31:16',
+        complexity: 1,
+        direction: 'bottom',
+        endAt: '0:42:09',
+        events: [
+          {
+            type: 'Event',
+            timecode: '0:01:44',
+            episode: '1B',
+            episodeRelativeTC: '0:06:00',
+            description:
+              'Subaru se presse de retrouver Emilia mais il tombe sur les 3 bandits. Il les défonce et va directement à la taverne.',
+          },
+          {
+            type: 'Event',
+            timecode: '0:05:45',
+            episode: '1B',
+            episodeRelativeTC: '0:11:45',
+            description:
+              "Il rentre dans la taverne et négocie avec Rom, Felt et Elsa pour racheter l'insigne.",
+          },
+          {
+            type: 'Death',
+            timecode: '0:10:53',
+            episode: '1B',
+            episodeRelativeTC: '0:22:38',
+            description:
+              'Les négociations échouent. Elsa tue Rom, Felt et Subaru.',
+          },
+        ],
+      },
+      {
         id: 1,
         startAt: '00:00:00',
         complexity: 1,
@@ -113,39 +159,6 @@ export default Vue.extend({
         startAt: '00:31:16',
         complexity: 1,
         direction: 'top',
-        endAt: '0:42:09',
-        events: [
-          {
-            type: 'Event',
-            timecode: '0:01:44',
-            episode: '1B',
-            episodeRelativeTC: '0:06:00',
-            description:
-              'Subaru se presse de retrouver Emilia mais il tombe sur les 3 bandits. Il les défonce et va directement à la taverne.',
-          },
-          {
-            type: 'Event',
-            timecode: '0:05:45',
-            episode: '1B',
-            episodeRelativeTC: '0:11:45',
-            description:
-              "Il rentre dans la taverne et négocie avec Rom, Felt et Elsa pour racheter l'insigne.",
-          },
-          {
-            type: 'Death',
-            timecode: '0:10:53',
-            episode: '1B',
-            episodeRelativeTC: '0:22:38',
-            description:
-              'Les négociations échouent. Elsa tue Rom, Felt et Subaru.',
-          },
-        ],
-      },
-      {
-        id: 3,
-        startAt: '00:31:16',
-        complexity: 2,
-        direction: 'bottom',
         endAt: '0:42:09',
         events: [
           {

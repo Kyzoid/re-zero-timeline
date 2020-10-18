@@ -1,22 +1,52 @@
 <template>
-  <div class="event absolute pl-1">
-    <div v-if="type === 'Event'"
-    class="bg-gray-700 rounded-full w-3 h-3 hover:bg-gray-600 cursor-pointer"></div>
-    <DeathIcon v-if="type === 'Death'" />
+  <div
+  class="event absolute pl-1 flex items-center"
+  >
+    <div @click="showTooltip" class="event">
+      <div v-if="type === 'Event'"
+      class="bg-gray-700 rounded-full w-3 h-3 hover:bg-gray-600 cursor-pointer">
+      </div>
+      <DeathIcon v-if="type === 'Death'" />
+    </div>
+    <Tooltip
+    class="hidden"
+    :type="type"
+    :timecode="timecode"
+    :episode="episode"
+    :episodeRelativeTC="episodeRelativeTC"
+    :description="description"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import DeathIcon from './DeathIcon.vue';
+import Tooltip from './Tooltip.vue';
 
 export default Vue.extend({
   name: 'Event',
   components: {
     DeathIcon,
+    Tooltip,
   },
   props: {
     type: String,
+    timecode: String,
+    episode: String,
+    episodeRelativeTC: String,
+    description: String,
+  },
+  methods: {
+    showTooltip({ target }: { target: HTMLElement }) {
+      const event = target.closest('.event');
+      if (event) {
+        const sibling = event.nextSibling as HTMLElement;
+        if (sibling) {
+          sibling.classList.toggle('hidden');
+        }
+      }
+    },
   },
 });
 </script>
