@@ -4,7 +4,7 @@
   >
     <div @click="showTooltip" class="event">
       <div v-if="type === 'Event'"
-      class="bg-gray-700 rounded-full w-3 h-3 hover:bg-gray-600 cursor-pointer">
+      class="bg-gray-700 rounded-full w-4 h-4 hover:bg-gray-600 cursor-pointer">
       </div>
       <DeathIcon v-if="type === 'Death'" />
     </div>

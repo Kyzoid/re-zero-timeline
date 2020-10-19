@@ -1,10 +1,9 @@
-// TODO: Handle timeline position depending on jointDirection
 // TODO: RespawnEvent should be highlighted and be the starting point of multiple timelines
 // TODO: Implement Popper.js
 <template>
-  <div class="timelines">
+  <div class="timelines flex flex-col justify-between">
     <div id="timeline-graph"
-    class="flex flex-col justify-center bg-gray-900 h-64 mb-2 py-4 overflow-x-auto">
+    class="h-full flex flex-col justify-center bg-gray-900 h-64 mb-2 py-4 overflow-x-auto">
       <Timeline
         v-for="timeline in computedTimelines"
         :key="timeline.events.timecode"
@@ -14,9 +13,9 @@
         <div
           class="flex items-center justify-center
           z-10 text-gray-500 bg-black bg-opacity-75
-          h-5 w-5"
+          h-6 w-6"
         >
-          <span class="text-xs">{{ timeline.id }}</span>
+          <span class="text-sm">{{ timeline.id }}</span>
         </div>
         <TimelineJoint
         :joint-direction="timeline.direction"
@@ -34,7 +33,7 @@
         </Event>
       </Timeline>
     </div>
-    <div>
+    <div id="timecode-selector" class="mb-2">
       <h3>Time elapsed</h3>
       <input
         type="range"
@@ -270,4 +269,9 @@ export default Vue.extend({
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #2d3748;
 }
+
+.timelines {
+  height: calc(100vh - 53px);
+}
+
 </style>

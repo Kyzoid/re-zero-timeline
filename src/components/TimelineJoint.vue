@@ -64,14 +64,17 @@ export default Vue.extend({
     jointDirection: String,
     jointComplexity: Number,
   },
+  data: () => ({
+    spacing: 40,
+  }),
   methods: {
-    topSvgPosition: (jointComplexity: number) => (
-      // weird offset with only "-20*jointComplexity"
-      (-20 - ((jointComplexity - 1) * 2)) * (jointComplexity)
-    ),
-    svgHeight: (jointComplexity: number) => (
-      24 * jointComplexity
-    ),
+    topSvgPosition(jointComplexity: number) {
+      // odd adjustments to correctly position the svg
+      return (-(this.$data.spacing - 4) - ((jointComplexity - 1) * 2)) * (jointComplexity);
+    },
+    svgHeight(jointComplexity: number) {
+      return this.$data.spacing * jointComplexity;
+    },
   },
 });
 </script>
