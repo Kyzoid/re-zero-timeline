@@ -5,7 +5,7 @@
       class="absolute"
       :style="`
       left: -1.1rem;
-      top: ${topSvgPosition(jointComplexity)};
+      bottom: 0rem;
       transform: scale(-1,1) rotate(180deg);
     `"
       width="19"
@@ -67,11 +67,12 @@ export default Vue.extend({
   data: () => ({
     spacing: 40,
   }),
-  methods: {
-    topSvgPosition(jointComplexity: number) {
-      // odd adjustments to correctly position the svg
-      return (-(this.$data.spacing - 4) - ((jointComplexity - 1) * 2)) * (jointComplexity);
+  computed: {
+    computedComplexity(): number {
+      return this.jointComplexity + 1;
     },
+  },
+  methods: {
     svgHeight(jointComplexity: number) {
       return this.$data.spacing * jointComplexity;
     },

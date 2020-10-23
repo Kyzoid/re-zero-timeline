@@ -1,27 +1,30 @@
-// TODO: RespawnEvent should be highlighted and be the starting point of multiple timelines
+// TODO: Each timeline should wait for the previous timeline to draw
 // TODO: Implement Popper.js
+// TODO: Options: timeline structure (linear, top, bottom)
 <template>
   <div class="timelines flex flex-col justify-between">
-    <div id="timeline-graph"
-    class="h-full flex flex-col justify-center bg-gray-900 h-64 mb-2 py-4 overflow-x-auto">
+    <div
+      id="timeline-graph"
+      class="h-full flex flex-col justify-center bg-gray-900 h-64 mb-2 py-4 overflow-x-auto"
+    >
       <Timeline
         v-for="timeline in computedTimelines"
         :key="timeline.events.timecode"
         :style="`margin-left:${timeline.position};
            width: ${timeline.width};`"
       >
-        <div
-          class="flex items-center justify-center
-          z-10 text-gray-500 bg-black bg-opacity-75
-          h-6 w-6"
+        <!-- <div
+          class="flex items-center justify-center z-10 text-gray-500 bg-black bg-opacity-75 h-6 w-6"
         >
           <span class="text-sm">{{ timeline.id }}</span>
-        </div>
+        </div> -->
         <TimelineJoint
-        :joint-direction="timeline.direction"
-        :joint-complexity="timeline.complexity" />
+          :joint-direction="timeline.direction"
+          :joint-complexity="timeline.complexity"
+        />
         <Event
           v-for="event in timeline.events"
+          :data-respawn-id="event.id"
           :key="event.timecode"
           :style="`left:${event.position};`"
           :type="event.type"
@@ -52,8 +55,19 @@ import Vue from 'vue';
 import Event from './Event.vue';
 import Timeline from './Timeline.vue';
 import TimelineJoint from './TimelineJoint.vue';
+// eslint-disable-next-line import/extensions
+import data from './data.ts';
 
 interface EventType {
+  type: string;
+  timecode: string;
+  episode: string;
+  episodeRelativeTC: string;
+  description: string;
+}
+
+interface RespawnPointType {
+  id: number;
   type: string;
   timecode: string;
   episode: string;
@@ -64,10 +78,11 @@ interface EventType {
 interface TimelineType {
   id: number;
   startAt: string;
+  respawnId: number;
   complexity: number;
   direction: string;
   endAt: string;
-  events: EventType[];
+  events: (EventType|RespawnPointType)[];
 }
 
 export default Vue.extend({
@@ -80,113 +95,7 @@ export default Vue.extend({
   data: () => ({
     ratio: 5, // represents the number of seconds for 1px
     lengthInSeconds: 59304,
-    timelines: [
-      {
-        id: 3,
-        startAt: '00:31:16',
-        complexity: 1,
-        direction: 'bottom',
-        endAt: '0:42:09',
-        events: [
-          {
-            type: 'Event',
-            timecode: '0:01:44',
-            episode: '1B',
-            episodeRelativeTC: '0:06:00',
-            description:
-              'Subaru se presse de retrouver Emilia mais il tombe sur les 3 bandits. Il les défonce et va directement à la taverne.',
-          },
-          {
-            type: 'Event',
-            timecode: '0:05:45',
-            episode: '1B',
-            episodeRelativeTC: '0:11:45',
-            description:
-              "Il rentre dans la taverne et négocie avec Rom, Felt et Elsa pour racheter l'insigne.",
-          },
-          {
-            type: 'Death',
-            timecode: '0:10:53',
-            episode: '1B',
-            episodeRelativeTC: '0:22:38',
-            description:
-              'Les négociations échouent. Elsa tue Rom, Felt et Subaru.',
-          },
-        ],
-      },
-      {
-        id: 1,
-        startAt: '00:00:00',
-        complexity: 1,
-        direction: 'top',
-        endAt: '00:28:44',
-        events: [
-          {
-            type: 'Event',
-            timecode: '0:02:00',
-            episode: '1A',
-            episodeRelativeTC: '0:02:00',
-            description: 'Subaru apparait devant la fontaine de Lugnica.',
-          },
-          {
-            type: 'Event',
-            timecode: '0:05:30',
-            episode: '1A',
-            episodeRelativeTC: '0:05:30',
-            description: 'Subaru tombe sur les 3 bandits et Emilia le soigne.',
-          },
-          {
-            type: 'Event',
-            timecode: '0:27:16',
-            episode: '1B',
-            episodeRelativeTC: '0:02:00',
-            description:
-              "Subaru laisse Emilia à l'entrée de la taverne de Rom et entre seul.",
-          },
-          {
-            type: 'Death',
-            timecode: '0:28:44',
-            episode: '1B',
-            episodeRelativeTC: '0:04:16',
-            description:
-              "il meurt éventré par surprise par Elsa lorsqu'il rentre dans la taverne de Rom.",
-          },
-        ],
-      },
-      {
-        id: 2,
-        startAt: '00:31:16',
-        complexity: 1,
-        direction: 'top',
-        endAt: '0:42:09',
-        events: [
-          {
-            type: 'Event',
-            timecode: '0:01:44',
-            episode: '1B',
-            episodeRelativeTC: '0:06:00',
-            description:
-              'Subaru se presse de retrouver Emilia mais il tombe sur les 3 bandits. Il les défonce et va directement à la taverne.',
-          },
-          {
-            type: 'Event',
-            timecode: '0:05:45',
-            episode: '1B',
-            episodeRelativeTC: '0:11:45',
-            description:
-              "Il rentre dans la taverne et négocie avec Rom, Felt et Elsa pour racheter l'insigne.",
-          },
-          {
-            type: 'Death',
-            timecode: '0:10:53',
-            episode: '1B',
-            episodeRelativeTC: '0:22:38',
-            description:
-              'Les négociations échouent. Elsa tue Rom, Felt et Subaru.',
-          },
-        ],
-      },
-    ],
+    timelines: data.timelines,
   }),
   methods: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -201,9 +110,17 @@ export default Vue.extend({
     },
 
     getTimelinePosition(timeline: TimelineType) {
-      return `${
-        (this.toSeconds(timeline.startAt) / this.lengthInSeconds) * 100
-      }%`;
+      const respawnPoint = document.querySelector(`[data-respawn-id='${timeline.respawnId}'] > div`);
+      const timelineGraph = document.getElementById('timeline-graph');
+      let value = 0;
+      if (respawnPoint !== null && timelineGraph !== null) {
+        const respawnPointPositions = respawnPoint.getBoundingClientRect();
+        const timelineGraphPositions = timelineGraph.getBoundingClientRect();
+        const position = (respawnPointPositions.x - timelineGraphPositions.x) + 22;
+
+        value = position;
+      }
+      return `${value}px`;
     },
 
     toSeconds(timecode: string) {
@@ -231,16 +148,17 @@ export default Vue.extend({
     computedTimelines(): TimelineType[] {
       return this.timelines.map((timeline: TimelineType) => {
         const {
-          id, startAt, complexity, direction, endAt, events,
+          id, startAt, respawnId, complexity, direction, endAt, events,
         } = timeline;
         const duration = this.getDuration(startAt, endAt);
-        const computedEvents = events.map((event: EventType) => ({
+        const computedEvents = events.map((event) => ({
           ...event,
           position: this.getEventPosition(timeline, event),
         }));
         return {
           id,
           startAt,
+          respawnId,
           complexity,
           direction,
           endAt,
@@ -273,5 +191,4 @@ export default Vue.extend({
 .timelines {
   height: calc(100vh - 53px);
 }
-
 </style>

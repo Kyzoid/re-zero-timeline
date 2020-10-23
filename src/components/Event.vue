@@ -2,14 +2,15 @@
   <div
   class="event absolute pl-1 flex items-center"
   >
-    <div @click="showTooltip" class="event">
+    <div @click="showTooltip" class="event z-20">
       <div v-if="type === 'Event'"
       class="bg-gray-700 rounded-full w-4 h-4 hover:bg-gray-600 cursor-pointer">
       </div>
       <DeathIcon v-if="type === 'Death'" />
+      <RespawnPoint :data-complexity="complexity" v-if="type === 'RespawnPoint'" />
     </div>
     <Tooltip
-    class="hidden"
+    class="hidden z-30"
     :type="type"
     :timecode="timecode"
     :episode="episode"
@@ -23,12 +24,14 @@
 import Vue from 'vue';
 import DeathIcon from './DeathIcon.vue';
 import Tooltip from './Tooltip.vue';
+import RespawnPoint from './RespawnPoint.vue';
 
 export default Vue.extend({
   name: 'Event',
   components: {
     DeathIcon,
     Tooltip,
+    RespawnPoint,
   },
   props: {
     type: String,
@@ -36,6 +39,7 @@ export default Vue.extend({
     episode: String,
     episodeRelativeTC: String,
     description: String,
+    complexity: Number,
   },
   methods: {
     showTooltip({ target }: { target: HTMLElement }) {

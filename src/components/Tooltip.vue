@@ -1,6 +1,6 @@
 <template>
   <div class="select-none z-20 text-sm tooltip bg-black bg-opacity-75 p-2 rounded absolute">
-    <h1 class="text-lg">{{ type === "Event" ? "Evénement" : "Mort" }} #{{ 1 }}</h1>
+    <h1 class="text-lg">{{ type }} #{{ 1 }}</h1>
     <hr class="mb-2">
     <p class="leading-none">{{ description }}</p>
     <div class="mt-2 flex justify-between">
