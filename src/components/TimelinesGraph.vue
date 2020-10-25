@@ -1,4 +1,3 @@
-// TODO: Each timeline should wait for the previous timeline to draw
 // TODO: Implement Popper.js
 // TODO: Options: timeline structure (linear, top, bottom)
 <template>
@@ -10,14 +9,9 @@
       <Timeline
         v-for="timeline in computedTimelines"
         :key="timeline.events.timecode"
-        :style="`margin-left:${timeline.position};
-           width: ${timeline.width};`"
+        :style="`width: ${timeline.width};`"
+        :data-timeline-id="timeline.id"
       >
-        <!-- <div
-          class="flex items-center justify-center z-10 text-gray-500 bg-black bg-opacity-75 h-6 w-6"
-        >
-          <span class="text-sm">{{ timeline.id }}</span>
-        </div> -->
         <TimelineJoint
           :joint-direction="timeline.direction"
           :joint-complexity="timeline.complexity"
@@ -25,7 +19,7 @@
         <Event
           v-for="event in timeline.events"
           :data-respawn-id="event.id"
-          :key="event.timecode"
+          :key="event.description"
           :style="`left:${event.position};`"
           :type="event.type"
           :timecode="event.timecode"
@@ -55,8 +49,7 @@ import Vue from 'vue';
 import Event from './Event.vue';
 import Timeline from './Timeline.vue';
 import TimelineJoint from './TimelineJoint.vue';
-// eslint-disable-next-line import/extensions
-import data from './data.ts';
+import data from './data';
 
 interface EventType {
   type: string;
@@ -143,7 +136,18 @@ export default Vue.extend({
         * 100
       }%`;
     },
+
+    positionTimelines() {
+      this.timelines.forEach((timeline: TimelineType) => {
+        const timelineDOM: HTMLElement | null = document.querySelector(`[data-timeline-id='${timeline.id}']`);
+        const position = this.getTimelinePosition(timeline);
+        if (timelineDOM !== null) {
+          timelineDOM.style.marginLeft = position;
+        }
+      });
+    },
   },
+
   computed: {
     computedTimelines(): TimelineType[] {
       return this.timelines.map((timeline: TimelineType) => {
@@ -164,11 +168,16 @@ export default Vue.extend({
           endAt,
           duration,
           width: this.getTimelineWidth(timeline),
-          position: this.getTimelinePosition(timeline),
           events: computedEvents,
         };
       });
     },
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      this.positionTimelines();
+    });
   },
 });
 </script>

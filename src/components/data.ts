@@ -91,7 +91,7 @@ export default {
           timecode: '0:01:44',
           episode: '1B',
           episodeRelativeTC: '0:06:00',
-          description: '???',
+          description: '????',
         },
         {
           type: 'Death',
@@ -360,7 +360,7 @@ export default {
           timecode: '00:00:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
-          description: '??????',
+          description: '?????? ? ',
         },
         {
           type: 'Death',
@@ -439,7 +439,7 @@ export default {
           timecode: '00:00:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
-          description: '???',
+          description: '??????!',
         },
         {
           type: 'Event',
@@ -468,7 +468,7 @@ export default {
           timecode: '00:00:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
-          description: '???',
+          description: '??!?',
         },
         {
           type: 'Death',
@@ -492,7 +492,7 @@ export default {
           timecode: '00:00:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
-          description: '???',
+          description: '!???',
         },
         {
           id: 5,
@@ -531,7 +531,7 @@ export default {
           timecode: '00:10:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
-          description: '???',
+          description: '??!!!?',
         },
         {
           id: 6,
@@ -546,7 +546,7 @@ export default {
           timecode: '00:00:00',
           episode: '',
           episodeRelativeTC: '00:10:00',
-          description: '???',
+          description: '?!!??',
         },
         {
           type: 'Death',
