@@ -172,21 +172,21 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:01:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru becomes a butler once again to do the same actions has the previous loop and understand who kill him.',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:04:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Emilia teaches Subaru to read and write. After the lesson, Subaru asks Emilia for a date in the village.',
         },
         {
           type: 'Death',
-          timecode: '00:00:00',
+          timecode: '00:11:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'In the middle of the night, Subaru feels sick and get out of his room. He hears chains in the distance and, without being able to retaliate, he is killed.',
@@ -203,21 +203,21 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:02:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'This time, Subaru becomes a guest to gather informations about the killer.',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:06:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: "After four days, Subaru leaves Roswaal's mansion to wait for the killer in the forest.",
         },
         {
           type: 'Death',
-          timecode: '00:00:00',
+          timecode: '00:11:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: "Rem attacks Subaru because he stinks the Witch. She cuts Subaru's right leg and questions him. Ram finishes him off by cutting his throat.",
@@ -234,28 +234,28 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:03:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru wakes up but is too shocked by the previous loop to move.',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:05:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Beatrice visits Subaru in his room. He asks for her protection until the morning of the fifth day.',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:08:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: "On the morning of the 5th day, Subaru leaves Beatrice's library and finds Rem dead because of a curse.",
         },
         {
           type: 'Death',
-          timecode: '00:00:00',
+          timecode: '00:11:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Ram chases Subaru outside the mansion to kill him. Beatrice is still protection Subaru but he jumps off the cliff.',
@@ -268,67 +268,67 @@ export default {
       respawnId: 2,
       complexity: 4,
       direction: 'top',
-      endAt: '0:42:09',
+      endAt: '01:22:09',
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:02:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru becomes a butler for the third time.',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:05:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: "Subaru struggles to hide his emotions and bursts into tears on Emilia's knees.",
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:12:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Pack teaches Subaru how to use his mana (kind of).',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:16:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '???????????? Subaru and Rem go to the village',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:20:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru and Rem quickly returns to the village because Beatrice tells him that the curse comes from it.',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:24:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru protects Rem and is severely wounded.',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:28:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'To prevent Subaru from dying of his many curses, Rem goes alone in the forest to kill all the beast ([name of the beast here]). Ram and Subaru join her and Roswaal saves them.',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:34:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '???? Emilia, Subaru, Rem and Roswaal go to Lugnica. (details ?)',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:38:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'The next day, Emilia and Roswaal return to Lugnica. Subaru goes to the capital even though Emilia said him not to.',
@@ -342,7 +342,7 @@ export default {
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:41:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru fights with Julius.',
@@ -350,21 +350,21 @@ export default {
         {
           id: 3,
           type: 'RespawnPoint',
-          timecode: '00:05:00',
+          timecode: '00:44:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru and Rem talk to the apple vendor.',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:47:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '?????? ? ',
         },
         {
           type: 'Death',
-          timecode: '00:11:01',
+          timecode: '00:51:01',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Looking for Emilia, Subaru finds a secret corridor in the mansion and is freezed to death by Pack.',
@@ -381,14 +381,14 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:05:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '???',
         },
         {
           type: 'Death',
-          timecode: '00:00:00',
+          timecode: '00:11:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru arrives at the mansion, an enourmous creature emerges from the mansion, freezes and beheads Subaru.',
@@ -405,21 +405,21 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:03:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '???',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:07:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru tries to tell Emilia about his ability to respawn, but the Witch of Envy kills her.',
         },
         {
           type: 'Death',
-          timecode: '00:00:00',
+          timecode: '00:11:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru is attacked by the Cult, Pack kills everyone.',
@@ -436,21 +436,21 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:02:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '??????!',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:08:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru negociate with Crusch.',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:13:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Willhem kills the White Whale',
@@ -458,14 +458,14 @@ export default {
         {
           id: 4,
           type: 'RespawnPoint',
-          timecode: '00:30:00',
+          timecode: '00:26:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru briefs his unit after killing the White Whale.',
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:30:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '??!?',
@@ -489,7 +489,7 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:02:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '!???',
@@ -504,7 +504,7 @@ export default {
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:14:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Crusch unit is attacked by greed and gluttony bishops.',
@@ -543,7 +543,7 @@ export default {
         },
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:40:00',
           episode: '',
           episodeRelativeTC: '00:10:00',
           description: '?!!??',
@@ -567,14 +567,14 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:06:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '???',
         },
         {
           type: 'Death',
-          timecode: '00:00:00',
+          timecode: '00:11:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Elsa rip open Subaru by surprise in the mansion.',
@@ -591,14 +591,14 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:02:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '???',
         },
         {
           type: 'Death',
-          timecode: '00:00:00',
+          timecode: '00:11:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: "Elsa enters Beatrice's library and kills Subaru.",
@@ -615,14 +615,14 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:06:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '???',
         },
         {
           type: 'Death',
-          timecode: '00:00:00',
+          timecode: '00:11:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: 'Subaru is eatten alive by the Great Rabbit.',
@@ -639,14 +639,14 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:04:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '???',
         },
         {
           type: 'Death',
-          timecode: '00:00:00',
+          timecode: '00:11:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: "Subaru kills himself with Echidna's blessing.",
@@ -663,14 +663,14 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:04:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '???',
         },
         {
           type: 'Death',
-          timecode: '00:00:00',
+          timecode: '00:11:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: "Subaru dies in Emilia's arms inside Echidna's temple",
@@ -687,14 +687,14 @@ export default {
       events: [
         {
           type: 'Event',
-          timecode: '00:00:00',
+          timecode: '00:01:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: "Subaru tries the second step of Echidna's temple.",
         },
         {
           type: 'Death',
-          timecode: '00:00:00',
+          timecode: '00:11:00',
           episode: '',
           episodeRelativeTC: '00:00:00',
           description: '???',

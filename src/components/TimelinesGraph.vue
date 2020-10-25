@@ -1,5 +1,9 @@
 // TODO: Implement Popper.js
-// TODO: Options: timeline structure (linear, top, bottom)
+// TODO: User should be able to move through the timeline graph with a cursor grab
+// TODO: Draw timelines depending on time elapsed input value
+// TODO: User should be able to jump to a specific time elapsed value with the episode menu
+// TODO: Add style
+// TODO: Menu options: timeline structure (linear, top, center, bottom)
 <template>
   <div class="timelines flex flex-col justify-between">
     <div
@@ -109,7 +113,7 @@ export default Vue.extend({
       if (respawnPoint !== null && timelineGraph !== null) {
         const respawnPointPositions = respawnPoint.getBoundingClientRect();
         const timelineGraphPositions = timelineGraph.getBoundingClientRect();
-        const position = (respawnPointPositions.x - timelineGraphPositions.x) + 22;
+        const position = (respawnPointPositions.x - timelineGraphPositions.x) + 23;
 
         value = position;
       }
