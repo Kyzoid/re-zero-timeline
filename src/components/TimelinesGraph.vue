@@ -8,31 +8,34 @@
   <div class="timelines flex flex-col justify-between">
     <div
       id="timeline-graph"
-      class="h-full flex flex-col justify-center bg-gray-900 h-64 mb-2 py-4 overflow-x-auto"
+      class="h-full
+      flex flex-col justify-center bg-gray-900 h-64 mb-2 overflow-scroll"
     >
-      <Timeline
-        v-for="timeline in computedTimelines"
-        :key="timeline.events.timecode"
-        :style="`width: ${timeline.width};`"
-        :data-timeline-id="timeline.id"
-      >
-        <TimelineJoint
-          :joint-direction="timeline.direction"
-          :joint-complexity="timeline.complexity"
-        />
-        <Event
-          v-for="event in timeline.events"
-          :data-respawn-id="event.id"
-          :key="event.description"
-          :style="`left:${event.position};`"
-          :type="event.type"
-          :timecode="event.timecode"
-          :episode="event.episode"
-          :episodeRelativeTC="event.episodeRelativeTC"
-          :description="event.description"
+      <div class="h-full w-full">
+        <Timeline
+          v-for="timeline in computedTimelines"
+          :key="timeline.events.timecode"
+          :style="`width: ${timeline.width};`"
+          :data-timeline-id="timeline.id"
         >
-        </Event>
-      </Timeline>
+          <TimelineJoint
+            :joint-direction="timeline.direction"
+            :joint-complexity="timeline.complexity"
+          />
+          <Event
+            v-for="event in timeline.events"
+            :data-respawn-id="event.id"
+            :key="event.description"
+            :style="`left:${event.position};`"
+            :type="event.type"
+            :timecode="event.timecode"
+            :episode="event.episode"
+            :episodeRelativeTC="event.episodeRelativeTC"
+            :description="event.description"
+          >
+          </Event>
+        </Timeline>
+      </div>
     </div>
     <div id="timecode-selector" class="mb-2">
       <h3>Time elapsed</h3>
@@ -150,6 +153,10 @@ export default Vue.extend({
         }
       });
     },
+
+    moveScroll({ clientX, clientY }: MouseEvent) {
+      console.log(clientX, clientY);
+    },
   },
 
   computed: {
@@ -189,6 +196,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 ::-webkit-scrollbar {
   height: 0.5rem;
+  width: 0.5rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -199,6 +207,10 @@ export default Vue.extend({
   border-radius: 10px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #2d3748;
+}
+
+::-webkit-scrollbar-corner {
+  background: #151a24;
 }
 
 .timelines {

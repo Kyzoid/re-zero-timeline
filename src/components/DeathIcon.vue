@@ -1,12 +1,11 @@
 <template>
 <!-- eslint-disable max-len -->
-  <div class="death-event cursor-pointer pr-8">
+  <div class="death-event cursor-pointer">
     <svg
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 612 612"
-      fill="#9b2c2c"
     >
       <path
         d="M122.855,335.491c3.514,11.463,7.147,23.318,8.96,35.258c0.741,4.866,3.647,40.261,5.218,59.707
@@ -62,10 +61,13 @@ export default Vue.extend({
 .death-event {
   left: 100%;
   & svg {
+    transition: all .3s;
     width: 16px;
     height: 16px;
+    fill: #9b2c2c;
     &:hover {
-      fill: red;
+      transition: all .3s;
+      fill: #805ad5;
     }
   }
 }

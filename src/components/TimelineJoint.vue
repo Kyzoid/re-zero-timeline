@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="timeline-joint">
     <svg
       v-if="jointDirection === 'top'"
       class="absolute"
@@ -81,4 +81,9 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+
+svg path, svg line {
+  transition: all .3s;
+}
+
 </style>

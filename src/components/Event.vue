@@ -4,7 +4,8 @@
   >
     <div @click="showTooltip" class="event z-20">
       <div v-if="type === 'Event'"
-      class="bg-gray-700 rounded-full w-4 h-4 hover:bg-gray-600 cursor-pointer">
+      class="bg-gray-700 rounded-full w-4 h-4 hover:bg-purple-600
+      cursor-pointer transition duration-300">
       </div>
       <DeathIcon v-if="type === 'Death'" />
       <RespawnPoint :data-complexity="complexity" v-if="type === 'RespawnPoint'" />

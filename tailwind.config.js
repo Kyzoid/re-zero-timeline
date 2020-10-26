@@ -14,6 +14,10 @@ module.exports = {
       lg: '1024px',
       xl: '1280px',
     },
+    cursor: {
+      grab: 'grab',
+      pointer: 'pointer',
+    },
     container: {
       center: true,
     },

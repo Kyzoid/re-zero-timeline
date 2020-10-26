@@ -1,6 +1,8 @@
 <template>
   <div class="relative w-full h-10 flex items-center">
-    <div class="timeline relative flex items-center loop h-1 bg-gray-700 w-full">
+    <div
+    class="timeline relative flex items-center transition duration-300
+    loop h-1 bg-gray-700 hover:bg-purple-600 w-full">
       <slot></slot>
     </div>
   </div>
@@ -14,5 +16,18 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+
+.timeline:hover .timeline-joint svg {
+  & path {
+    stroke: #805ad5;
+    transition: all .3s;
+  }
+
+  & line {
+    stroke: #805ad5;
+    transition: all .3s;
+  }
+}
+
 </style>
