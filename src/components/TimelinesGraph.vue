@@ -1,5 +1,4 @@
 // TODO: Implement Popper.js
-// TODO: User should be able to move through the timeline graph with a cursor grab
 // TODO: Draw timelines depending on time elapsed input value
 // TODO: User should be able to jump to a specific time elapsed value with the episode menu
 // TODO: Add style
@@ -7,6 +6,9 @@
 <template>
   <div class="timelines flex flex-col justify-between">
     <div
+      @mousedown="handleMouseDown"
+      @mouseup="handleMouseUp"
+      @mousemove="handleMouseMove"
       id="timeline-graph"
       class="h-full
       flex flex-col justify-center bg-gray-900 h-64 mb-2 overflow-scroll"
@@ -96,6 +98,9 @@ export default Vue.extend({
     ratio: 5, // represents the number of seconds for 1px
     lengthInSeconds: 59304,
     timelines: data.timelines,
+    isDrawing: false,
+    lastClientX: 0,
+    lastClientY: 0,
   }),
   methods: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -154,8 +159,66 @@ export default Vue.extend({
       });
     },
 
-    moveScroll({ clientX, clientY }: MouseEvent) {
-      console.log(clientX, clientY);
+    setLastClient(event: MouseEvent) {
+      const { clientX, clientY } = event;
+      this.$data.lastClientX = clientX;
+      this.$data.lastClientY = clientY;
+    },
+
+    handleMouseDown(event: MouseEvent) {
+      event.preventDefault();
+      const timelineGraph = document.getElementById('timeline-graph') as HTMLElement;
+      timelineGraph.style.cursor = 'all-scroll';
+      this.$data.isDrawing = true;
+      this.setLastClient(event);
+    },
+
+    handleMouseUp(event: MouseEvent) {
+      event.preventDefault();
+      const timelineGraph = document.getElementById('timeline-graph') as HTMLElement;
+      timelineGraph.style.cursor = 'inherit';
+      this.$data.isDrawing = false;
+    },
+
+    handleMouseMove(event: MouseEvent) {
+      event.preventDefault();
+      if (this.$data.isDrawing) {
+        const timelineGraph = document.getElementById('timeline-graph') as HTMLElement;
+        const { clientX, clientY } = event;
+        const { lastClientX, lastClientY } = this.$data;
+
+        this.setLastClient(event);
+
+        const scrollByValueX = -(clientX - lastClientX);
+        const scrollByValueY = -(clientY - lastClientY);
+
+        if ((timelineGraph.scrollLeft + scrollByValueX) >= 0) {
+          timelineGraph.scrollBy(scrollByValueX, 0);
+        }
+
+        if ((timelineGraph.scrollTop + scrollByValueY) >= 0) {
+          timelineGraph.scrollBy(0, scrollByValueY);
+        }
+
+        this.handleMouseLeave(timelineGraph, event);
+      }
+    },
+
+    handleMouseLeave(element: HTMLElement, { clientX, clientY }: MouseEvent) {
+      const {
+        x, y, width, height,
+      } = element.getBoundingClientRect();
+      const offset = 1;
+      if (
+        (clientX - offset) <= x
+        || (clientY - offset) <= y
+        || (clientX + offset) >= (x + width)
+        || (clientY + offset) >= (y + height)
+      ) {
+        // eslint-disable-next-line no-param-reassign
+        element.style.cursor = 'inherit';
+        this.$data.isDrawing = false;
+      }
     },
   },
 

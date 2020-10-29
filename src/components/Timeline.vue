@@ -18,15 +18,19 @@ export default Vue.extend({
 
 <style lang="scss">
 
-.timeline:hover .timeline-joint svg {
-  & path {
-    stroke: #805ad5;
-    transition: all .3s;
-  }
+.timeline:hover {
+  transition: all .3s;
+  & .timeline-joint svg {
+    z-index: 15;
+    & path {
+      stroke: #805ad5;
+      transition: all .3s;
+    }
 
-  & line {
-    stroke: #805ad5;
-    transition: all .3s;
+    & line {
+      stroke: #805ad5;
+      transition: all .3s;
+    }
   }
 }
 
