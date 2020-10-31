@@ -1,17 +1,16 @@
-// TODO: Implement Popper.js
 // TODO: Draw timelines depending on time elapsed input value
 // TODO: User should be able to jump to a specific time elapsed value with the episode menu
-// TODO: Add style
+// TODO: Add style (timeline graph background should change depending on current respawnPoint)
 // TODO: Menu options: timeline structure (linear, top, center, bottom)
 <template>
-  <div class="timelines flex flex-col justify-between">
+  <div class="timelines relative bg-gray-900 flex flex-col justify-between mb-4">
     <div
       @mousedown="handleMouseDown"
       @mouseup="handleMouseUp"
       @mousemove="handleMouseMove"
       id="timeline-graph"
       class="h-full
-      flex flex-col justify-center bg-gray-900 h-64 mb-2 overflow-scroll"
+      flex flex-col justify-center h-64 overflow-scroll"
     >
       <div class="h-full w-full">
         <Timeline
@@ -39,17 +38,7 @@
         </Timeline>
       </div>
     </div>
-    <div id="timecode-selector" class="mb-2">
-      <h3>Time elapsed</h3>
-      <input
-        type="range"
-        class="w-full"
-        min="0"
-        :max="lengthInSeconds"
-        value="0"
-      />
-      <div><span id="time-elapsed">0</span> minutes elapsed.</div>
-    </div>
+    <TimecodeSelector />
   </div>
 </template>
 
@@ -58,9 +47,11 @@ import Vue from 'vue';
 import Event from './Event.vue';
 import Timeline from './Timeline.vue';
 import TimelineJoint from './TimelineJoint.vue';
+import TimecodeSelector from './TimecodeSelector.vue';
+
 import data from './data';
 
-interface EventType {
+type EventType = {
   type: string;
   timecode: string;
   episode: string;
@@ -68,7 +59,7 @@ interface EventType {
   description: string;
 }
 
-interface RespawnPointType {
+type RespawnPointType = {
   id: number;
   type: string;
   timecode: string;
@@ -77,7 +68,7 @@ interface RespawnPointType {
   description: string;
 }
 
-interface TimelineType {
+type TimelineType = {
   id: number;
   startAt: string;
   respawnId: number;
@@ -93,10 +84,10 @@ export default Vue.extend({
     Event,
     Timeline,
     TimelineJoint,
+    TimecodeSelector,
   },
   data: () => ({
     ratio: 5, // represents the number of seconds for 1px
-    lengthInSeconds: 59304,
     timelines: data.timelines,
     isDrawing: false,
     lastClientX: 0,
@@ -208,7 +199,7 @@ export default Vue.extend({
       const {
         x, y, width, height,
       } = element.getBoundingClientRect();
-      const offset = 1;
+      const offset = 3;
       if (
         (clientX - offset) <= x
         || (clientY - offset) <= y
@@ -258,8 +249,8 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 ::-webkit-scrollbar {
-  height: 0.5rem;
-  width: 0.5rem;
+  height: 0rem;
+  width: 0rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -277,6 +268,6 @@ export default Vue.extend({
 }
 
 .timelines {
-  height: calc(100vh - 53px);
+  height: calc(100vh - 43px);
 }
 </style>

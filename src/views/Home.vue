@@ -1,5 +1,5 @@
 <template>
-  <div class="home container h-full">
+  <div class="home h-full">
     <TimelinesGraph />
     <EpisodeSelector />
   </div>
