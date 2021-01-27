@@ -1,5 +1,5 @@
 <template>
-  <div id="timecode-selector" class="z-50 bg-gray-800 w-full bottom-0 p-2">
+  <div id="progress-bar" class="z-50 bg-gray-800 w-full bottom-0 p-2">
     <input
       @input="updateDomInfo"
       id="time-elapsed-input"
@@ -14,13 +14,19 @@
         <div><span id="time-elapsed">00:00</span> / <span id="episode-length">25:16</span></div>
         <span class="px-2">•</span><div>Episode <span id="episode">S1 - E1A</span></div>
       </div>
-      <div><span id="total-time-elapsed">00:00:00</span> / <span>16:28:24</span></div>
+      <div class="flex">
+        <div class="flex">
+          <span id="total-time-elapsed">00:00:00</span> / <span>16:28:24</span>
+        </div>
+        <Settings />
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import Settings from './Settings.vue';
 
 import data from './data';
 
@@ -31,7 +37,10 @@ type Episode = {
 }
 
 export default Vue.extend({
-  name: 'TimecodeSelector',
+  name: 'ProgressBar',
+  components: {
+    Settings,
+  },
   data: () => ({
     timecode: 0,
     lengthInSeconds: 59304,
@@ -104,5 +113,4 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-
 </style>

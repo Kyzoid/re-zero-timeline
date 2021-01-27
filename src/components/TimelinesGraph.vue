@@ -1,9 +1,8 @@
 // TODO: Draw timelines depending on time elapsed input value
-// TODO: User should be able to jump to a specific time elapsed value with the episode menu
+// TODO: Add a custom slider component that could be split in chapters like the ytp progress bar
 // TODO: Add style (timeline graph background should change depending on current respawnPoint)
-// TODO: Menu options: timeline structure (linear, top, center, bottom)
 <template>
-  <div class="timelines relative bg-gray-900 flex flex-col justify-between mb-4">
+  <div class="timelines relative bg-gray-900 flex flex-col justify-between">
     <div
       @mousedown="handleMouseDown"
       @mouseup="handleMouseUp"
@@ -38,7 +37,7 @@
         </Timeline>
       </div>
     </div>
-    <TimecodeSelector />
+    <ProgressBar />
   </div>
 </template>
 
@@ -47,7 +46,7 @@ import Vue from 'vue';
 import Event from './Event.vue';
 import Timeline from './Timeline.vue';
 import TimelineJoint from './TimelineJoint.vue';
-import TimecodeSelector from './TimecodeSelector.vue';
+import ProgressBar from './ProgressBar.vue';
 
 import data from './data';
 
@@ -84,7 +83,7 @@ export default Vue.extend({
     Event,
     Timeline,
     TimelineJoint,
-    TimecodeSelector,
+    ProgressBar,
   },
   data: () => ({
     ratio: 5, // represents the number of seconds for 1px
