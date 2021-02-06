@@ -3,7 +3,7 @@
     <SettingsPanel
       id="settings-panel"
       class="absolute right-0 opacity-0"
-      style="bottom: 64px"
+      style="bottom: 64px; right: 8px;"
     />
     <SettingsIcon
       id="settings-icon"

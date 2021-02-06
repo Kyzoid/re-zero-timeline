@@ -1,5 +1,8 @@
 <template>
-  <div id="app" class="h-full" @mousedown="handleClick">
+  <div id="app"
+  class="h-full"
+  @mousedown="handleMouseDown"
+  @mouseup="handleMouseUp">
     <div id="nav" class="bg-gray-800 py-2">
       <div class="container mx-auto flex justify-between">
         <router-link to="/" class="hover:text-gray-400">Home</router-link>
@@ -19,7 +22,11 @@ import Vue from 'vue';
 export default Vue.extend({
   name: 'App',
   methods: {
-    handleClick(event: { target: HTMLElement }) {
+    handleMouseUp() {
+      this.$store.commit('bottomBarIsMouseDown', false);
+    },
+    handleMouseDown(event: { target: HTMLElement }) {
+      this.$store.commit('bottomBarIsMouseDown', true);
       if (!event.target.closest('#settings')) {
         const settingsPanel = document.getElementById('settings-panel') as HTMLElement;
         const settingsIcon = document.getElementById('settings-icon') as HTMLElement;

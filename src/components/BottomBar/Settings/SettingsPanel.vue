@@ -1,5 +1,5 @@
 <template>
-  <div id="settings-pannel" class="z-50 bg-black bg-opacity-50 w-64 py-1 mb-2 mr-2 rounded-sm">
+  <div id="settings-pannel" class="z-50 bg-black bg-opacity-50 w-64 py-1 rounded-sm">
     <div class="flex flex-col text-sm">
       <div class="flex justify-between px-2 py-1 hover:bg-gray-900 hover:bg-opacity-50">
         <label for="spoil-level">Spoil level</label>

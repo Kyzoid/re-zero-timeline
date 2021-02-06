@@ -1,6 +1,7 @@
 // TODO: Draw timelines depending on time elapsed input value
 // TODO: Add a custom slider component that could be split in chapters like the ytp progress bar
 // TODO: Add style (timeline graph background should change depending on current respawnPoint)
+// TODO: Refactor: make a created hook that retrieve DOM elements that are later use in methods
 <template>
   <div class="timelines relative bg-gray-900 flex flex-col justify-between">
     <div
@@ -37,7 +38,7 @@
         </Timeline>
       </div>
     </div>
-    <ProgressBar />
+    <BottomBar />
   </div>
 </template>
 
@@ -46,7 +47,7 @@ import Vue from 'vue';
 import Event from './Event.vue';
 import Timeline from './Timeline.vue';
 import TimelineJoint from './TimelineJoint.vue';
-import ProgressBar from './ProgressBar.vue';
+import BottomBar from './BottomBar/BottomBar.vue';
 
 import data from './data';
 
@@ -83,7 +84,7 @@ export default Vue.extend({
     Event,
     Timeline,
     TimelineJoint,
-    ProgressBar,
+    BottomBar,
   },
   data: () => ({
     ratio: 5, // represents the number of seconds for 1px
@@ -92,12 +93,12 @@ export default Vue.extend({
     lastClientX: 0,
     lastClientY: 0,
   }),
+  provide(): {} {
+    return {
+      toSeconds: this.toSeconds,
+    };
+  },
   methods: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    log(item: any) {
-      console.log(item);
-    },
-
     getTimelineWidth(timeline: TimelineType) {
       return `${
         this.getDuration(timeline.startAt, timeline.endAt) / this.ratio

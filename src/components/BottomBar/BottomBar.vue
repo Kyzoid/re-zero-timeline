@@ -1,18 +1,18 @@
 <template>
-  <div id="progress-bar" class="z-50 bg-gray-800 w-full bottom-0 p-2">
-    <input
-      @input="updateDomInfo"
-      id="time-elapsed-input"
-      type="range"
-      class="w-full"
-      min="0"
-      :max="lengthInSeconds"
-      value="0"
-    />
+  <div id="progress-bar"
+  class="z-50 bottom-bar-gradient w-full bottom-0 p-2"
+  >
+    <ProgressBar class="mb-2 mt-1" v-on:play-progress-change="updateBarInfo" :min="0" :max="lengthInSeconds" />
     <div class="flex justify-between">
       <div class="flex">
-        <div><span id="time-elapsed">00:00</span> / <span id="episode-length">25:16</span></div>
-        <span class="px-2">•</span><div>Episode <span id="episode">S1 - E1A</span></div>
+        <div><span id="time-elapsed">0:00</span> / <span id="episode-length">25:16</span></div>
+        <span class="px-2">•</span>
+        <div>
+          <span>Episode </span>
+          <span id="episode-id">1A</span>
+          <span> – </span>
+          <span id="episode-title">The End of the Beginning and the Beginning of the End</span>
+        </div>
       </div>
       <div class="flex">
         <div class="flex">
@@ -26,33 +26,38 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Settings from './Settings.vue';
+import Settings from './Settings/Settings.vue';
+import ProgressBar from './ProgressBar.vue';
 
-import data from './data';
+import data from '../data';
 
 type Episode = {
   id: string;
   endAt: string;
   title: string;
-}
+};
 
 export default Vue.extend({
-  name: 'ProgressBar',
+  name: 'BottomBar',
   components: {
     Settings,
+    ProgressBar,
   },
   data: () => ({
+    isMouseDown: false,
     timecode: 0,
     lengthInSeconds: 59304,
     episodes: data.episodes,
   }),
+  provide(): {} {
+    return {
+      toTimecode: this.toTimecode,
+    };
+  },
   methods: {
-    updateDomInfo() {
-      const timeElapsedInput = document.getElementById('time-elapsed-input') as HTMLInputElement;
-      const timeElapsedInputValue = parseInt(timeElapsedInput.value, 10);
-
-      this.updateTotalTimeElapsed(timeElapsedInputValue);
-      this.updateEpisode(timeElapsedInputValue);
+    updateBarInfo(value: number) {
+      this.updateTotalTimeElapsed(value);
+      this.updateEpisode(value);
     },
 
     updateTotalTimeElapsed(timeElapsedInputValue: number) {
@@ -61,11 +66,13 @@ export default Vue.extend({
     },
 
     updateEpisode(timeElapsedInputValue: number) {
-      const episodeElement = document.getElementById('episode') as HTMLElement;
+      const episodeIdElement = document.getElementById('episode-id') as HTMLElement;
+      const episodeTitleElement = document.getElementById('episode-title') as HTMLElement;
       const episodeIndex = this.findEpisodeIndex(timeElapsedInputValue);
       const episode = this.$data.episodes[episodeIndex];
       if (episode) {
-        episodeElement.textContent = episode.id;
+        episodeIdElement.textContent = episode.code;
+        episodeTitleElement.textContent = episode.title;
       }
       this.updateEpisodeTimeElapsed(episodeIndex, timeElapsedInputValue);
     },
@@ -86,8 +93,8 @@ export default Vue.extend({
         timeElapsedInputValue - this.toSeconds(episodeStartAt),
       );
 
-      episodeLengthElement.textContent = episodeLength.slice(3);
-      episodeTimeElapsedElement.textContent = episodeTimeElapsed.slice(3);
+      episodeLengthElement.textContent = episodeLength;
+      episodeTimeElapsedElement.textContent = episodeTimeElapsed;
     },
 
     toSeconds(timecode: string) {
@@ -99,7 +106,31 @@ export default Vue.extend({
     },
 
     toTimecode(seconds: number): string {
-      return new Date(seconds * 1000).toISOString().substr(11, 8);
+      const timecode = new Date(seconds * 1000).toISOString().substr(11, 8);
+      const splittedTimecode = timecode.split(':').map((digit) => +digit);
+      const cleanedTimecode: string[] = [];
+      splittedTimecode.forEach((digit, index) => {
+        if (index === 0 && digit === 0) {
+          return;
+        }
+
+        if (index === 2) {
+          cleanedTimecode.push(digit.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
+          return;
+        }
+
+        if (index !== 0) {
+          if (splittedTimecode[index - 1] === 0) {
+            cleanedTimecode.push(digit.toString());
+            return;
+          }
+          cleanedTimecode.push(digit.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
+          return;
+        }
+
+        cleanedTimecode.push(digit.toString());
+      });
+      return cleanedTimecode.join(':');
     },
 
     findEpisodeIndex(seconds: number): number {
@@ -113,4 +144,8 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.bottom-bar-gradient {
+  background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,0) 100%);
+}
 </style>

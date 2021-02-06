@@ -21,6 +21,18 @@ module.exports = {
     container: {
       center: true,
     },
+    scale: {
+      140: '1.4',
+      180: '1.8',
+    },
+    zIndex: {
+      1: '1',
+      2: '2',
+      3: '3',
+      20: '20',
+      30: '30',
+      50: '50',
+    },
   },
   variants: {},
   plugins: [],
