@@ -25,7 +25,13 @@
               style="width: 0%"
             ></div>
           </div>
-          <div class="absolute hidden" id="hover-tooltip" style="bottom: 14px; left:0px;">00:00</div>
+          <div class="flex flex-col absolute hidden text-sm text-center" id="hover-tooltip">
+            <div class="flex flex-col leading-tight mb-1">
+              <span id="tooltip-episode" class="font-bold">Episode 1A</span>
+              <span id="tooltip-title">The End of the Beginning and the Beginning of the End</span>
+            </div>
+            <div id="tooltip-timer">00:00</div>
+          </div>
         </div>
         <div class="thumb absolute bg-purple-600 pointer-events-none"
         style="left: 0px;"></div>
@@ -97,7 +103,9 @@ export default Vue.extend({
             const episodeFound = this.episodes[this.episodes.findIndex((episode: Episode) => episode.id === +episodeId)];
             const episodeLength = (this as any).toSeconds(episodeFound.length);
             const currentEpisodeTimecode = (this as any).toTimecode((episodeLength * width) / 100);
-            (document.getElementById('hover-tooltip') as HTMLDivElement).textContent = currentEpisodeTimecode;
+            (document.querySelector('#hover-tooltip #tooltip-timer') as HTMLDivElement).textContent = currentEpisodeTimecode;
+            (document.querySelector('#hover-tooltip #tooltip-title') as HTMLDivElement).textContent = episodeFound.title;
+            (document.querySelector('#hover-tooltip #tooltip-episode') as HTMLDivElement).textContent = `Episode ${episodeFound.code}`;
           }
         }
       });
@@ -123,9 +131,18 @@ export default Vue.extend({
       const { right: progressBarRight } = progressBar.getBoundingClientRect();
       const tooltipOffset = 8 + tooltipWidth / 2;
       const newTooltipLeft = x - tooltipOffset;
-      if (newTooltipLeft >= 0 && (tooltipRight - (tooltipLeft - newTooltipLeft - 8) < progressBarRight)) {
-        tooltip.style.left = `${newTooltipLeft}px`;
+      if (newTooltipLeft <= 0) {
+        tooltip.style.left = '0px';
+        return;
       }
+
+      const newTooltipRight = tooltipRight - (tooltipLeft - newTooltipLeft - 8);
+      if (newTooltipRight >= progressBarRight) {
+        tooltip.style.left = `${progressBarRight - tooltipWidth}px`;
+        return;
+      }
+
+      tooltip.style.left = `${newTooltipLeft}px`;
     },
     handleHoverEnter(event: { target: HTMLDivElement }) {
       const { id: chapterIndex } = event.target.dataset;
@@ -170,5 +187,11 @@ export default Vue.extend({
 
 .chapter:hover ~ #hover-tooltip {
   display: block;
+}
+
+#hover-tooltip {
+  bottom: 14px;
+  left:0px;
+  width: 200px;
 }
 </style>
