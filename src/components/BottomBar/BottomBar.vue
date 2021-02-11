@@ -81,8 +81,8 @@ export default Vue.extend({
       const episodeLengthElement = document.getElementById('episode-length') as HTMLElement;
       const episodeTimeElapsedElement = document.getElementById('time-elapsed') as HTMLElement;
 
-      const lastEpisode = this.$data.episodes[episodeIndex - 1];
-      const episodeStartAt = lastEpisode ? lastEpisode.endAt : '00:00:00';
+      const prevEpisode = this.$data.episodes[episodeIndex - 1];
+      const episodeStartAt = prevEpisode ? prevEpisode.endAt : '00:00:00';
       const episodeEndAt = this.$data.episodes[episodeIndex].endAt;
 
       const episodeLength = this.toTimecode(

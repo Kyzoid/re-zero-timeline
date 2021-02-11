@@ -34,7 +34,9 @@
           </div>
         </div>
         <div class="thumb absolute bg-purple-600 pointer-events-none"
-        style="left: 0px;"></div>
+        style="left: -6.5px;"></div>
+        <div class="hover-thumb absolute bg-gray-600 pointer-events-none"
+        style="left: -6.5px;"></div>
       </div>
     </div>
   </div>
@@ -83,15 +85,22 @@ export default Vue.extend({
   methods: {
     handleResize() {
       const newProgressBarWidth = this.progressBar.getBoundingClientRect().width;
+
       const thumb = document.querySelector('.thumb') as HTMLDivElement;
       const thumbLeft = thumb.getBoundingClientRect().left - 8;
       const newThumbPosition = (thumbLeft / this.progressBarWidth) * newProgressBarWidth;
       thumb.style.left = `${newThumbPosition}px`;
+
+      const hoverThumb = document.querySelector('.hover-thumb') as HTMLDivElement;
+      const hoverThumbLeft = hoverThumb.getBoundingClientRect().left - 8;
+      const newHoverThumbPosition = (hoverThumbLeft / this.progressBarWidth) * newProgressBarWidth;
+      hoverThumb.style.left = `${newHoverThumbPosition}px`;
+
       this.progressBarWidth = newProgressBarWidth;
     },
     emitPlayProgressChange(progressPosition: number) {
       const { width } = this.progressBar.getBoundingClientRect();
-      const value = Math.round((progressPosition / width) * this.max);
+      const value = Math.round(((progressPosition + 6.5) / width) * this.max);
       this.$emit('play-progress-change', value);
     },
     getChapters() {
@@ -101,21 +110,26 @@ export default Vue.extend({
       return this.getChapters()
         .filter((chapter: HTMLDivElement) => chapter.dataset.id && +chapter.dataset.id < chapterIndex);
     },
-    setProgress(chapters: HTMLDivElement[], width: number, type: string) {
+    setProgress(chapters: HTMLDivElement[], width: number, type: string, progressPosition?: number) {
       chapters.forEach((chapter) => {
         const progress = (type === 'hover')
           ? chapter.querySelector('.hover-progress') as HTMLDivElement
           : chapter.querySelector('.play-progress') as HTMLDivElement;
         progress.style.width = `${width}%`;
 
-        if (type === 'hover') {
+        if (type === 'hover' && progressPosition) {
           const hoverProgress = chapter.querySelector('.hover-progress')?.parentNode as HTMLDivElement;
           const episodeId = hoverProgress.dataset.id;
           if (episodeId) {
-            const episodeFound = this.episodes[this.episodes.findIndex((episode: Episode) => episode.id === +episodeId)];
-            const episodeLength = (this as any).toSeconds(episodeFound.length);
-            const currentEpisodeTimecode = (this as any).toTimecode((episodeLength * width) / 100);
-            (document.querySelector('#hover-tooltip #tooltip-timer') as HTMLDivElement).textContent = currentEpisodeTimecode;
+            const episodeIndex = this.episodes.findIndex((episode: Episode) => episode.id === +episodeId);
+            const episodeFound = this.episodes[episodeIndex];
+            const prevEpisodeFound = this.episodes[episodeIndex - 1];
+            const episodeStartAt = prevEpisodeFound ? prevEpisodeFound.endAt : '00:00:00';
+            const timeElapsedInputValue = Math.round(((progressPosition + 6.5) / this.progressBarWidth) * this.max);
+            const episodeTimeElapsed = (this as any).toTimecode(
+              timeElapsedInputValue - (this as any).toSeconds(episodeStartAt),
+            );
+            (document.querySelector('#hover-tooltip #tooltip-timer') as HTMLDivElement).textContent = episodeTimeElapsed;
             (document.querySelector('#hover-tooltip #tooltip-title') as HTMLDivElement).textContent = episodeFound.title;
             (document.querySelector('#hover-tooltip #tooltip-episode') as HTMLDivElement).textContent = `Episode ${episodeFound.code}`;
           }
@@ -136,6 +150,13 @@ export default Vue.extend({
         this.setProgress([target], progress, 'play');
       }
     },
+    setHoverThumbPosition(x: number, target: HTMLDivElement, progress: number) {
+      const hoverThumb = document.querySelector('.hover-thumb') as HTMLDivElement;
+      const thumbOffset = 8 + hoverThumb.getBoundingClientRect().width / 2;
+      const progressPosition = x - thumbOffset;
+      hoverThumb.style.left = `${progressPosition}px`;
+      this.setProgress([target], progress, 'hover', progressPosition);
+    },
     setTooltipPosition(x: number) {
       const tooltip = document.getElementById('hover-tooltip') as HTMLDivElement;
       const { width: tooltipWidth, right: tooltipRight, left: tooltipLeft } = tooltip.getBoundingClientRect();
@@ -155,22 +176,25 @@ export default Vue.extend({
 
       tooltip.style.left = `${newTooltipLeft}px`;
     },
-    handleHoverEnter(event: { target: HTMLDivElement }) {
-      const { id: chapterIndex } = event.target.dataset;
+    handleHoverEnter(event: MouseEvent) {
+      const target = event.target as HTMLDivElement;
+      const { id: chapterIndex } = target.dataset;
       if (chapterIndex) {
         const previousChapters = this.getPreviousChapters(+chapterIndex);
-        this.setProgress(previousChapters, 100, 'hover');
+        const { x: mouseX } = event;
+        this.setProgress(previousChapters, 100, 'hover', mouseX - 8);
       }
     },
-    handleHoverLeave() {
-      this.setProgress(this.getChapters(), 0, 'hover');
+    handleHoverLeave(event: MouseEvent) {
+      const { x: mouseX } = event;
+      this.setProgress(this.getChapters(), 0, 'hover', mouseX - 8);
     },
     handleMove(event: MouseEvent) {
       const target = event.target as HTMLDivElement;
       const { left: targetLeft, width: targetWidth } = target.getBoundingClientRect();
       const { x: mouseX } = event;
       const progress = Math.abs(Math.round(((mouseX - targetLeft) / targetWidth) * 100));
-      this.setProgress([target], progress, 'hover');
+      this.setHoverThumbPosition(mouseX, target, progress);
       this.setTooltipPosition(mouseX);
       if (this.$store.state.bottomBarIsMouseDown) {
         this.setThumbPosition(mouseX, target, progress);
@@ -197,6 +221,14 @@ export default Vue.extend({
   width: 13px;
   border-radius: 6.5px;
   transition: transform .1s cubic-bezier(0.4, 0.0, 1, 1);
+  top: -4px;
+}
+
+.hover-thumb {
+  height: 13px;
+  width: 13px;
+  border-radius: 6.5px;
+  opacity: 0;
   top: -4px;
 }
 
