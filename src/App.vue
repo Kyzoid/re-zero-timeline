@@ -28,12 +28,14 @@ export default Vue.extend({
     handleMouseDown(event: { target: HTMLElement }) {
       this.$store.commit('bottomBarIsMouseDown', true);
       if (!event.target.closest('#settings')) {
-        const settingsPanel = document.getElementById('settings-panel') as HTMLElement;
-        const settingsIcon = document.getElementById('settings-icon') as HTMLElement;
-        settingsPanel.classList.add('invisible');
-        settingsPanel.classList.remove('visible');
-        settingsPanel.classList.remove('opacity-100');
-        settingsIcon.classList.remove('rotate-90');
+        const settingsPanel = document.getElementById('settings-panel');
+        const settingsIcon = document.getElementById('settings-icon');
+        if (settingsPanel && settingsIcon) {
+          settingsPanel.classList.add('invisible');
+          settingsPanel.classList.remove('visible');
+          settingsPanel.classList.remove('opacity-100');
+          settingsIcon.classList.remove('rotate-90');
+        }
       }
     },
   },

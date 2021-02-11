@@ -1,6 +1,6 @@
 <template>
   <div id="progress-bar"
-  class="z-50 bottom-bar-gradient w-full bottom-0 p-2"
+  class="z-50 bottom-bar-gradient w-full bottom-0 p-2 text-sm"
   >
     <ProgressBar class="mb-2 mt-1" v-on:play-progress-change="updateBarInfo" :min="0" :max="lengthInSeconds" />
     <div class="flex justify-between">
@@ -10,8 +10,8 @@
         <div>
           <span>Episode </span>
           <span id="episode-id">1A</span>
-          <span> – </span>
-          <span id="episode-title">The End of the Beginning and the Beginning of the End</span>
+          <span class="hidden md:inline"> – </span>
+          <span class="hidden md:inline" id="episode-title">The End of the Beginning and the Beginning of the End</span>
         </div>
       </div>
       <div class="flex">

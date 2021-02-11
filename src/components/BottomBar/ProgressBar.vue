@@ -25,7 +25,7 @@
               style="width: 0%"
             ></div>
           </div>
-          <div class="flex flex-col absolute hidden text-sm text-center" id="hover-tooltip">
+          <div class="flex flex-col absolute hidden text-center" id="hover-tooltip">
             <div class="flex flex-col leading-tight mb-1">
               <span id="tooltip-episode" class="font-bold">Episode 1A</span>
               <span id="tooltip-title">The End of the Beginning and the Beginning of the End</span>
@@ -62,6 +62,7 @@ export default Vue.extend({
   },
   data: () => ({
     episodes: data.episodes,
+    progressBarWidth: 0,
   }),
   computed: {
     computedEpisodes(): Episode[] {
@@ -73,12 +74,23 @@ export default Vue.extend({
         };
       });
     },
+    progressBar(): HTMLDivElement {
+      const progressBar = document.querySelector('.progress-bar-container') as HTMLDivElement;
+      return progressBar;
+    },
   },
   inject: ['toTimecode', 'toSeconds'],
   methods: {
+    handleResize() {
+      const newProgressBarWidth = this.progressBar.getBoundingClientRect().width;
+      const thumb = document.querySelector('.thumb') as HTMLDivElement;
+      const thumbLeft = thumb.getBoundingClientRect().left - 8;
+      const newThumbPosition = (thumbLeft / this.progressBarWidth) * newProgressBarWidth;
+      thumb.style.left = `${newThumbPosition}px`;
+      this.progressBarWidth = newProgressBarWidth;
+    },
     emitPlayProgressChange(progressPosition: number) {
-      const progressBar = document.querySelector('.progress-bar-container') as HTMLDivElement;
-      const { width } = progressBar.getBoundingClientRect();
+      const { width } = this.progressBar.getBoundingClientRect();
       const value = Math.round((progressPosition / width) * this.max);
       this.$emit('play-progress-change', value);
     },
@@ -126,9 +138,8 @@ export default Vue.extend({
     },
     setTooltipPosition(x: number) {
       const tooltip = document.getElementById('hover-tooltip') as HTMLDivElement;
-      const progressBar = document.querySelector('.progress-bar-container') as HTMLDivElement;
       const { width: tooltipWidth, right: tooltipRight, left: tooltipLeft } = tooltip.getBoundingClientRect();
-      const { right: progressBarRight } = progressBar.getBoundingClientRect();
+      const { right: progressBarRight } = this.progressBar.getBoundingClientRect();
       const tooltipOffset = 8 + tooltipWidth / 2;
       const newTooltipLeft = x - tooltipOffset;
       if (newTooltipLeft <= 0) {
@@ -172,6 +183,10 @@ export default Vue.extend({
       const progress = Math.round(((mouseX - targetLeft) / targetWidth) * 100);
       this.setThumbPosition(mouseX, target, progress);
     },
+  },
+  mounted() {
+    window.addEventListener('resize', this.handleResize);
+    this.progressBarWidth = this.progressBar.getBoundingClientRect().width;
   },
 });
 </script>
