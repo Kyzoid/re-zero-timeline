@@ -17,11 +17,11 @@ module.exports = {
     'max-len': ['error', 140],
     'object-curly-newline': 'off',
     'vue/max-attributes-per-line': [2, {
-      'singleline': 20,
-      'multiline': {
-         'max': 1,
-         'allowFirstLine': true
-       }
+      singleline: 20,
+      multiline: {
+        max: 1,
+        allowFirstLine: true,
+      },
     }],
   },
 };

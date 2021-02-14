@@ -1,9 +1,9 @@
-// TODO: Draw timelines depending on time elapsed input value
-// TODO: Add a custom slider component that could be split in chapters like the ytp progress bar
 // TODO: Add style (timeline graph background should change depending on current respawnPoint)
 // TODO: Refactor: make a created hook that retrieve DOM elements that are later use in methods
+// TODO: Make an option to be scrolled full right automatically when input range value change
 <template>
-  <div class="timelines relative bg-gray-900 flex flex-col justify-between">
+  <div class="timelines relative bg-gray-900 flex flex-col justify-between"
+  >
     <div
       @mousedown="handleMouseDown"
       @mouseup="handleMouseUp"
@@ -14,7 +14,7 @@
     >
       <div class="h-full w-full">
         <Timeline
-          v-for="timeline in computedTimelines"
+          v-for="timeline in calculatedTimelines"
           :key="timeline.events.timecode"
           :style="`width: ${timeline.width};`"
           :data-timeline-id="timeline.id"
@@ -38,7 +38,7 @@
         </Timeline>
       </div>
     </div>
-    <BottomBar />
+    <BottomBar v-on:update-timelines="updateTimelines" />
   </div>
 </template>
 
@@ -52,20 +52,27 @@ import BottomBar from './BottomBar/BottomBar.vue';
 import data from './data';
 
 type EventType = {
+  timeline: string;
   type: string;
-  timecode: string;
   episode: string;
   episodeRelativeTC: string;
+  timecode: string;
+  absoluteTC: string;
   description: string;
+  position?: string;
+  id?: string;
 }
 
 type RespawnPointType = {
-  id: number;
+  timeline: string;
   type: string;
-  timecode: string;
   episode: string;
   episodeRelativeTC: string;
+  timecode: string;
+  absoluteTC: string;
   description: string;
+  position?: string;
+  id: string;
 }
 
 type TimelineType = {
@@ -75,6 +82,8 @@ type TimelineType = {
   complexity: number;
   direction: string;
   endAt: string;
+  duration?: number;
+  width?: string;
   events: (EventType|RespawnPointType)[];
 }
 
@@ -89,6 +98,7 @@ export default Vue.extend({
   data: () => ({
     ratio: 5, // represents the number of seconds for 1px
     timelines: data.timelines,
+    calculatedTimelines: [],
     isDrawing: false,
     lastClientX: 0,
     lastClientY: 0,
@@ -99,27 +109,82 @@ export default Vue.extend({
     };
   },
   methods: {
-    getTimelineWidth(timeline: TimelineType) {
-      return `${
-        this.getDuration(timeline.startAt, timeline.endAt) / this.ratio
-      }px`;
+    updateTimelines(timecodeValue: string) {
+      // ! (optimization) lodash, assign only if deep equality is false
+      this.$data.calculatedTimelines = this.calculateTimelines(timecodeValue);
+      this.$forceUpdate();
+    },
+    calculateTimelines(timecodeValue: string): TimelineType[] {
+      const timelines: TimelineType[] = [];
+
+      this.timelines.forEach((timeline: TimelineType) => {
+        if (this.toSeconds(timeline.startAt) <= this.toSeconds(timecodeValue)) {
+          const {
+            id, startAt, respawnId, complexity, direction, endAt, events,
+          } = timeline;
+          const duration = this.getDuration(startAt, endAt);
+          const computedEvents = this.calculteEvents(timeline, events, timecodeValue);
+          const width = this.toSeconds(timeline.endAt) >= this.toSeconds(timecodeValue)
+            ? this.getTimelineWidth(timeline, timecodeValue)
+            : this.getTimelineWidth(timeline);
+
+          timelines.push({
+            id,
+            startAt,
+            respawnId,
+            complexity,
+            direction,
+            endAt,
+            duration,
+            width: `${width}px`,
+            events: computedEvents,
+          });
+        }
+      });
+
+      return timelines;
     },
 
-    getTimelinePosition(timeline: TimelineType) {
-      const respawnPoint = document.querySelector(`[data-respawn-id='${timeline.respawnId}'] > div`);
-      const timelineGraph = document.getElementById('timeline-graph');
+    calculteEvents(timeline: TimelineType, events: (EventType|RespawnPointType)[], timecodeValue: string): (EventType|RespawnPointType)[] {
+      const computedEvents: (EventType|RespawnPointType)[] = [];
+
+      events.forEach((event) => {
+        if (this.toSeconds(event.absoluteTC) <= this.toSeconds(timecodeValue)) {
+          computedEvents.push({
+            ...event,
+            position: `${this.getEventPosition(timeline, event)}px`,
+          });
+        }
+      });
+
+      return computedEvents;
+    },
+
+    getTimelineWidth(timeline: TimelineType, timecodeValue?: string): number {
+      const timelineEndAt = timecodeValue || timeline.endAt;
+      return this.getDuration(timeline.startAt, timelineEndAt) / this.ratio;
+    },
+
+    getTimelinePosition(timeline: TimelineType): number {
+      // ! broken
+      const respawnPoint = document.querySelector(`[data-respawn-id='${timeline.respawnId}'] > div`) as HTMLElement | null;
+      const timelineGraph = document.getElementById('timeline-graph') as HTMLElement | null;
       let value = 0;
       if (respawnPoint !== null && timelineGraph !== null) {
         const respawnPointPositions = respawnPoint.getBoundingClientRect();
         const timelineGraphPositions = timelineGraph.getBoundingClientRect();
-        const position = (respawnPointPositions.x - timelineGraphPositions.x) + 23;
+        console.log('===');
+        console.log(respawnPointPositions);
+        console.log(timelineGraphPositions);
+        const scrollOffset = timelineGraph.scrollLeft;
+        const position = (respawnPointPositions.x - timelineGraphPositions.x) + 23.5 + scrollOffset;
 
         value = position;
       }
-      return `${value}px`;
+      return value;
     },
 
-    toSeconds(timecode: string) {
+    toSeconds(timecode: string): number {
       return timecode.split(':').reduce(
         // eslint-disable-next-line max-len
         (acc, value, index, array) => acc + parseInt(value, 10) * 60 ** (array.length - index - 1),
@@ -127,25 +192,23 @@ export default Vue.extend({
       );
     },
 
-    getDuration(startAt: string, endAt: string) {
+    getDuration(startAt: string, endAt: string): number {
       return this.toSeconds(endAt) - this.toSeconds(startAt);
     },
 
-    getEventPosition(timeline: TimelineType, event: EventType) {
-      // eslint-disable-next-line max-len
-      return `${
-        (this.toSeconds(event.timecode)
-          / this.getDuration(timeline.startAt, timeline.endAt))
-        * 100
-      }%`;
+    getEventPosition(timeline: TimelineType, event: EventType): number {
+      const eventPosition = (this.toSeconds(event.timecode)
+        / this.getDuration(timeline.startAt, timeline.endAt))
+        * this.getTimelineWidth(timeline);
+      return eventPosition;
     },
 
     positionTimelines() {
       this.timelines.forEach((timeline: TimelineType) => {
         const timelineDOM: HTMLElement | null = document.querySelector(`[data-timeline-id='${timeline.id}']`);
-        const position = this.getTimelinePosition(timeline);
         if (timelineDOM !== null) {
-          timelineDOM.style.marginLeft = position;
+          const position = this.getTimelinePosition(timeline);
+          timelineDOM.style.marginLeft = `${position}px`;
         }
       });
     },
@@ -215,30 +278,14 @@ export default Vue.extend({
 
   computed: {
     computedTimelines(): TimelineType[] {
-      return this.timelines.map((timeline: TimelineType) => {
-        const {
-          id, startAt, respawnId, complexity, direction, endAt, events,
-        } = timeline;
-        const duration = this.getDuration(startAt, endAt);
-        const computedEvents = events.map((event) => ({
-          ...event,
-          position: this.getEventPosition(timeline, event),
-        }));
-        return {
-          id,
-          startAt,
-          respawnId,
-          complexity,
-          direction,
-          endAt,
-          duration,
-          width: this.getTimelineWidth(timeline),
-          events: computedEvents,
-        };
-      });
+      return this.calculateTimelines('16:28:24');
     },
   },
-
+  updated() {
+    this.$nextTick(() => {
+      this.positionTimelines();
+    });
+  },
   mounted() {
     this.$nextTick(() => {
       this.positionTimelines();

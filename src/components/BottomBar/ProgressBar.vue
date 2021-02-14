@@ -102,6 +102,7 @@ export default Vue.extend({
       const { width } = this.progressBar.getBoundingClientRect();
       const value = Math.round(((progressPosition + 6.5) / width) * this.max);
       this.$emit('play-progress-change', value);
+      this.$parent.$emit('update-timelines', (this as any).toTimecode(value));
     },
     getChapters() {
       return Object.values(document.getElementsByClassName('chapter') as HTMLCollectionOf<HTMLDivElement>);

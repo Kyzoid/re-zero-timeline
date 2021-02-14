@@ -2,7 +2,10 @@
   <div id="progress-bar"
   class="z-50 bottom-bar-gradient w-full bottom-0 p-2 text-sm"
   >
-    <ProgressBar class="mb-2 mt-1" v-on:play-progress-change="updateBarInfo" :min="0" :max="lengthInSeconds" />
+    <ProgressBar class="mb-2 mt-1"
+    v-on:play-progress-change="updateBarInfo"
+    :min="0"
+    :max="lengthInSeconds" />
     <div class="flex justify-between">
       <div class="flex">
         <div><span id="time-elapsed">0:00</span> / <span id="episode-length">25:16</span></div>
@@ -62,7 +65,8 @@ export default Vue.extend({
 
     updateTotalTimeElapsed(timeElapsedInputValue: number) {
       const totalTimeElapsed = document.getElementById('total-time-elapsed') as HTMLElement;
-      totalTimeElapsed.textContent = this.toTimecode(timeElapsedInputValue);
+      const timeElapsedValue = this.toTimecode(timeElapsedInputValue);
+      totalTimeElapsed.textContent = timeElapsedValue;
     },
 
     updateEpisode(timeElapsedInputValue: number) {
