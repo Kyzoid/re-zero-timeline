@@ -44,6 +44,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import _ from 'lodash';
 import Event from './Event.vue';
 import Timeline from './Timeline.vue';
 import TimelineJoint from './TimelineJoint.vue';
@@ -110,9 +111,11 @@ export default Vue.extend({
   },
   methods: {
     updateTimelines(timecodeValue: string) {
-      // ! (optimization) lodash, assign only if deep equality is false
-      this.$data.calculatedTimelines = this.calculateTimelines(timecodeValue);
-      this.$forceUpdate();
+      const calculatedTimelines = this.calculateTimelines(timecodeValue);
+      if (!_.isEqual(this.$data.calculatedTimelines, calculatedTimelines)) {
+        this.$data.calculatedTimelines = calculatedTimelines;
+        this.$forceUpdate();
+      }
     },
     calculateTimelines(timecodeValue: string): TimelineType[] {
       const timelines: TimelineType[] = [];
@@ -166,19 +169,14 @@ export default Vue.extend({
     },
 
     getTimelinePosition(timeline: TimelineType): number {
-      // ! broken
       const respawnPoint = document.querySelector(`[data-respawn-id='${timeline.respawnId}'] > div`) as HTMLElement | null;
       const timelineGraph = document.getElementById('timeline-graph') as HTMLElement | null;
       let value = 0;
       if (respawnPoint !== null && timelineGraph !== null) {
         const respawnPointPositions = respawnPoint.getBoundingClientRect();
         const timelineGraphPositions = timelineGraph.getBoundingClientRect();
-        console.log('===');
-        console.log(respawnPointPositions);
-        console.log(timelineGraphPositions);
         const scrollOffset = timelineGraph.scrollLeft;
         const position = (respawnPointPositions.x - timelineGraphPositions.x) + 23.5 + scrollOffset;
-
         value = position;
       }
       return value;
