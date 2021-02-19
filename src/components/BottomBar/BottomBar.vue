@@ -29,16 +29,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { EpisodeType } from '../types';
 import Settings from './Settings/Settings.vue';
 import ProgressBar from './ProgressBar.vue';
-
 import data from '../data';
-
-type Episode = {
-  id: string;
-  endAt: string;
-  title: string;
-};
 
 export default Vue.extend({
   name: 'BottomBar',
@@ -52,11 +46,7 @@ export default Vue.extend({
     lengthInSeconds: 59304,
     episodes: data.episodes,
   }),
-  provide(): {} {
-    return {
-      toTimecode: this.toTimecode,
-    };
-  },
+  inject: ['toTimecode'],
   methods: {
     updateBarInfo(value: number) {
       this.updateTotalTimeElapsed(value);
@@ -65,7 +55,7 @@ export default Vue.extend({
 
     updateTotalTimeElapsed(timeElapsedInputValue: number) {
       const totalTimeElapsed = document.getElementById('total-time-elapsed') as HTMLElement;
-      const timeElapsedValue = this.toTimecode(timeElapsedInputValue);
+      const timeElapsedValue = (this as any).toTimecode(timeElapsedInputValue);
       totalTimeElapsed.textContent = timeElapsedValue;
     },
 
@@ -89,11 +79,11 @@ export default Vue.extend({
       const episodeStartAt = prevEpisode ? prevEpisode.endAt : '00:00:00';
       const episodeEndAt = this.$data.episodes[episodeIndex].endAt;
 
-      const episodeLength = this.toTimecode(
+      const episodeLength = (this as any).toTimecode(
         this.toSeconds(episodeEndAt) - this.toSeconds(episodeStartAt),
       );
 
-      const episodeTimeElapsed = this.toTimecode(
+      const episodeTimeElapsed = (this as any).toTimecode(
         timeElapsedInputValue - this.toSeconds(episodeStartAt),
       );
 
@@ -109,36 +99,8 @@ export default Vue.extend({
       );
     },
 
-    toTimecode(seconds: number): string {
-      const timecode = new Date(seconds * 1000).toISOString().substr(11, 8);
-      const splittedTimecode = timecode.split(':').map((digit) => +digit);
-      const cleanedTimecode: string[] = [];
-      splittedTimecode.forEach((digit, index) => {
-        if (index === 0 && digit === 0) {
-          return;
-        }
-
-        if (index === 2) {
-          cleanedTimecode.push(digit.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
-          return;
-        }
-
-        if (index !== 0) {
-          if (splittedTimecode[index - 1] === 0) {
-            cleanedTimecode.push(digit.toString());
-            return;
-          }
-          cleanedTimecode.push(digit.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
-          return;
-        }
-
-        cleanedTimecode.push(digit.toString());
-      });
-      return cleanedTimecode.join(':');
-    },
-
     findEpisodeIndex(seconds: number): number {
-      return this.$data.episodes.findIndex((episode: Episode) => {
+      return this.$data.episodes.findIndex((episode: EpisodeType) => {
         const epEndAtInSeconds = this.toSeconds(episode.endAt);
         return seconds <= epEndAtInSeconds;
       });

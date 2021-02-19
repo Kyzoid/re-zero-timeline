@@ -12,7 +12,7 @@
       class="h-full
       flex flex-col justify-center h-64 overflow-scroll"
     >
-      <div class="h-full w-full">
+      <div class="h-full w-full pb-10">
         <Timeline
           v-for="timeline in calculatedTimelines"
           :key="timeline.events.timecode"
@@ -24,7 +24,8 @@
             :joint-complexity="timeline.complexity"
           />
           <Event
-            v-for="event in timeline.events"
+            v-for="(event, eventIndex) in timeline.events"
+            :eventId="`timeline-${timeline.id}-event-${eventIndex}`"
             :data-respawn-id="event.id"
             :key="event.description"
             :style="`left:${event.position};`"
@@ -33,6 +34,7 @@
             :episode="event.episode"
             :episodeRelativeTC="event.episodeRelativeTC"
             :description="event.description"
+            :timeline="timeline.id"
           >
           </Event>
         </Timeline>
@@ -49,44 +51,9 @@ import Event from './Event.vue';
 import Timeline from './Timeline.vue';
 import TimelineJoint from './TimelineJoint.vue';
 import BottomBar from './BottomBar/BottomBar.vue';
+import { EventType, RespawnPointType, TimelineType } from './types';
 
 import data from './data';
-
-type EventType = {
-  timeline: string;
-  type: string;
-  episode: string;
-  episodeRelativeTC: string;
-  timecode: string;
-  absoluteTC: string;
-  description: string;
-  position?: string;
-  id?: string;
-}
-
-type RespawnPointType = {
-  timeline: string;
-  type: string;
-  episode: string;
-  episodeRelativeTC: string;
-  timecode: string;
-  absoluteTC: string;
-  description: string;
-  position?: string;
-  id: string;
-}
-
-type TimelineType = {
-  id: number;
-  startAt: string;
-  respawnId: number;
-  complexity: number;
-  direction: string;
-  endAt: string;
-  duration?: number;
-  width?: string;
-  events: (EventType|RespawnPointType)[];
-}
 
 export default Vue.extend({
   name: 'TimelinesGraph',
@@ -107,9 +74,37 @@ export default Vue.extend({
   provide(): {} {
     return {
       toSeconds: this.toSeconds,
+      toTimecode: this.toTimecode,
     };
   },
   methods: {
+    toTimecode(seconds: number): string {
+      const timecode = new Date(seconds * 1000).toISOString().substr(11, 8);
+      const splittedTimecode = timecode.split(':').map((digit) => +digit);
+      const cleanedTimecode: string[] = [];
+      splittedTimecode.forEach((digit, index) => {
+        if (index === 0 && digit === 0) {
+          return;
+        }
+
+        if (index === 2) {
+          cleanedTimecode.push(digit.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
+          return;
+        }
+
+        if (index !== 0) {
+          if (splittedTimecode[index - 1] === 0) {
+            cleanedTimecode.push(digit.toString());
+            return;
+          }
+          cleanedTimecode.push(digit.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
+          return;
+        }
+
+        cleanedTimecode.push(digit.toString());
+      });
+      return cleanedTimecode.join(':');
+    },
     updateTimelines(timecodeValue: string) {
       const calculatedTimelines = this.calculateTimelines(timecodeValue);
       if (!_.isEqual(this.$data.calculatedTimelines, calculatedTimelines)) {
@@ -282,6 +277,14 @@ export default Vue.extend({
   updated() {
     this.$nextTick(() => {
       this.positionTimelines();
+      const timelineGraph = document.getElementById('timeline-graph') as HTMLElement | null;
+      if (timelineGraph) {
+        timelineGraph.scroll({
+          top: 9999999,
+          left: 9999999,
+          behavior: 'smooth',
+        });
+      }
     });
   },
   mounted() {

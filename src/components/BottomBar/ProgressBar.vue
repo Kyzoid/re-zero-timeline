@@ -44,17 +44,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { EpisodeType } from '../types';
 
 import data from '../data';
-
-type Episode = {
-  id: number;
-  code: string;
-  endAt: string;
-  title: string;
-  length: string;
-  width?: number;
-}
 
 export default Vue.extend({
   name: 'ProgressBar',
@@ -67,7 +59,7 @@ export default Vue.extend({
     progressBarWidth: 0,
   }),
   computed: {
-    computedEpisodes(): Episode[] {
+    computedEpisodes(): EpisodeType[] {
       return this.episodes.map((episode) => {
         const width = ((this as any).toSeconds(episode.length) / this.max) * 100;
         return {
@@ -122,7 +114,7 @@ export default Vue.extend({
           const hoverProgress = chapter.querySelector('.hover-progress')?.parentNode as HTMLDivElement;
           const episodeId = hoverProgress.dataset.id;
           if (episodeId) {
-            const episodeIndex = this.episodes.findIndex((episode: Episode) => episode.id === +episodeId);
+            const episodeIndex = this.episodes.findIndex((episode: EpisodeType) => episode.id === +episodeId);
             const episodeFound = this.episodes[episodeIndex];
             const prevEpisodeFound = this.episodes[episodeIndex - 1];
             const episodeStartAt = prevEpisodeFound ? prevEpisodeFound.endAt : '00:00:00';
