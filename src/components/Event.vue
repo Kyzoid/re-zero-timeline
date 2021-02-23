@@ -3,9 +3,14 @@
     <div :id="eventId" class="z-20">
       <div
         v-if="type === 'Event'"
-        class="bg-gray-700 rounded-full w-4 h-4 hover:bg-purple-600 cursor-pointer transition duration-300"
-      ></div>
-      <DeathIcon v-if="type === 'Death'" />
+        class="respawn-point border-2 hover:border-subaru-100 border-transparent rounded-full w-6 h-6 transition duration-300
+        cursor-pointer transition duration-300 flex items-center justify-center transform hover:scale-120"
+        >
+        <div class="bg-rz-logo-100 rounded-full w-4 h-4
+          cursor-pointer transition duration-300">
+        </div>
+      </div>
+      <DeathIcon v-if="type === 'Death'"/>
       <RespawnPoint :data-complexity="complexity" v-if="type === 'RespawnPoint'" />
     </div>
   </div>
@@ -52,11 +57,14 @@ export default Vue.extend({
           Episode ${this.$props.episode} – ${episodeFound ? episodeFound.title : ''} (${this.$props.episodeRelativeTC})
         </span>
         <p class="py-1">${this.$props.description}</p>
-        <span>Type: <span class="text-purple-600">${this.$props.type} #${this.$props.timeline}</span></span>
+        <span>Type:
+          <span class="text-purple-300">
+            ${this.$props.type} ${this.$props.type === 'Death' ? '#' : ''}${this.$props.type === 'Death' ? this.$props.timeline : ''}
+          </span>
+        </span>
       `,
       allowHTML: true,
       arrow: true,
-      trigger: 'click',
       theme: 'translucent',
       animation: 'shift-away',
     });
@@ -74,3 +82,9 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style lang="postcss" scoped>
+  .respawn-point:hover > div {
+    @apply bg-subaru-100;
+  }
+</style>

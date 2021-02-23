@@ -3,15 +3,7 @@
   class="h-full"
   @mousedown="handleMouseDown"
   @mouseup="handleMouseUp">
-    <div id="nav" class="bg-gray-800 py-2">
-      <div class="container mx-auto flex justify-between">
-        <router-link to="/" class="hover:text-gray-400">Home</router-link>
-        <router-link to="/" class="re-zero font-bold text-black text-lg">
-          <span class="text-purple-300 font-normal">Re</span>:ゼロ
-        </router-link>
-        <router-link to="/about" class="hover:text-gray-400">About</router-link>
-      </div>
-    </div>
+    <router-view name="header" />
     <router-view />
   </div>
 </template>
@@ -42,11 +34,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
-  .re-zero {
-    text-shadow: 0 0 1px white;
-  }
-
+<style lang="postcss">
   input[type="range"]::-webkit-slider-thumb {
     background-color: red;
   }
@@ -57,7 +45,11 @@ export default Vue.extend({
 
   input[type=range]::-webkit-slider-runnable-track {}
 
-  body {
+  html {
+    font-family: Roboto !important;
+  }
+
+  html, body {
     user-select: none;
   }
 </style>

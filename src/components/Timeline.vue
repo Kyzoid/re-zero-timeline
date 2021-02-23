@@ -2,7 +2,7 @@
   <div class="relative w-full h-10 flex items-center">
     <div
     class="timeline relative flex items-center transition duration-300
-    loop h-1 bg-gray-700 hover:bg-purple-600 w-full">
+    loop h-1 bg-rz-logo-100 hover:bg-subaru-100 w-full">
       <slot></slot>
     </div>
   </div>
@@ -23,12 +23,12 @@ export default Vue.extend({
   & .timeline-joint svg {
     z-index: 15;
     & path {
-      stroke: #805ad5;
+      stroke: #F3B15F;
       transition: all .3s;
     }
 
     & line {
-      stroke: #805ad5;
+      stroke: #F3B15F;
       transition: all .3s;
     }
   }

@@ -16,7 +16,7 @@
     >
       <path
         d="M18.2963 2C9.2961 2 2 11.8497 2 24"
-        stroke="#4A5568"
+        stroke="#796BAE"
         stroke-width="4"
       />
       <line
@@ -24,7 +24,7 @@
         y1="24"
         x2="2"
         :y2="svgHeight(jointComplexity)"
-        stroke="#4A5568"
+        stroke="#796BAE"
         stroke-width="4"
       />
     </svg>
@@ -40,7 +40,7 @@
     >
       <path
         d="M18.2963 2C9.2961 2 2 11.8497 2 24"
-        stroke="#4A5568"
+        stroke="#796BAE"
         stroke-width="4"
       />
       <line
@@ -48,7 +48,7 @@
         y1="24"
         x2="2"
         :y2="svgHeight(jointComplexity)"
-        stroke="#4A5568"
+        stroke="#796BAE"
         stroke-width="4"
       />
     </svg>

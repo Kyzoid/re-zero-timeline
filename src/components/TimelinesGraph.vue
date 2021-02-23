@@ -1,8 +1,7 @@
-// TODO: Add style (timeline graph background should change depending on current respawnPoint)
+// TODO: Add background style
 // TODO: Refactor: make a created hook that retrieve DOM elements that are later use in methods
-// TODO: Make an option to be scrolled full right automatically when input range value change
 <template>
-  <div class="timelines relative bg-gray-900 flex flex-col justify-between"
+  <div class="timelines relative bg-rz-700 flex flex-col justify-between"
   >
     <div
       @mousedown="handleMouseDown"
@@ -40,7 +39,7 @@
         </Timeline>
       </div>
     </div>
-    <BottomBar v-on:update-timelines="updateTimelines" />
+    <BottomBar v-on:update-timelines="updateTimelines" v-on:tree-generation-change="updateTreeGeneration" />
   </div>
 </template>
 
@@ -78,6 +77,9 @@ export default Vue.extend({
     };
   },
   methods: {
+    updateTreeGeneration() {
+      console.log('ok');
+    },
     toTimecode(seconds: number): string {
       const timecode = new Date(seconds * 1000).toISOString().substr(11, 8);
       const splittedTimecode = timecode.split(':').map((digit) => +digit);
@@ -171,7 +173,7 @@ export default Vue.extend({
         const respawnPointPositions = respawnPoint.getBoundingClientRect();
         const timelineGraphPositions = timelineGraph.getBoundingClientRect();
         const scrollOffset = timelineGraph.scrollLeft;
-        const position = (respawnPointPositions.x - timelineGraphPositions.x) + 23.5 + scrollOffset;
+        const position = (respawnPointPositions.x - timelineGraphPositions.x) + 27.5 + scrollOffset;
         value = position;
       }
       return value;
@@ -316,6 +318,6 @@ export default Vue.extend({
 }
 
 .timelines {
-  height: calc(100vh - 43px);
+  height: calc(100vh - 91px);
 }
 </style>

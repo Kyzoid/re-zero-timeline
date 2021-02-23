@@ -1,6 +1,6 @@
 <template>
   <div id="progress-bar"
-  class="z-50 bottom-bar-gradient w-full bottom-0 p-2 text-sm"
+  class="text-white z-50 bottom-bar-gradient w-full bottom-0 p-2 text-sm"
   >
     <ProgressBar class="mb-2 mt-1"
     v-on:play-progress-change="updateBarInfo"
@@ -21,7 +21,7 @@
         <div class="flex">
           <span id="total-time-elapsed">00:00:00</span> / <span>16:28:24</span>
         </div>
-        <Settings />
+        <!-- <Settings /> -->
       </div>
     </div>
   </div>
@@ -30,14 +30,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import { EpisodeType } from '../types';
-import Settings from './Settings/Settings.vue';
+// import Settings from './Settings/Settings.vue';
 import ProgressBar from './ProgressBar.vue';
 import data from '../data';
 
 export default Vue.extend({
   name: 'BottomBar',
   components: {
-    Settings,
+    // Settings,
     ProgressBar,
   },
   data: () => ({

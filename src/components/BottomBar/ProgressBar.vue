@@ -17,7 +17,7 @@
             :style="`width:${episode.width}%; margin-right: ${episode.id !== 39 ? '2px' : '0px'};`"
           >
             <div
-              class="play-progress z-2 absolute left-0 h-full bg-purple-600 pointer-events-none"
+              class="play-progress z-2 absolute left-0 h-full bg-purple-700 pointer-events-none"
               style="width: 0%"
             ></div>
             <div
@@ -33,7 +33,7 @@
             <div id="tooltip-timer">00:00</div>
           </div>
         </div>
-        <div class="thumb absolute bg-purple-600 pointer-events-none"
+        <div class="thumb absolute bg-purple-700 pointer-events-none"
         style="left: -6.5px;"></div>
         <div class="hover-thumb absolute bg-gray-600 pointer-events-none"
         style="left: -6.5px;"></div>

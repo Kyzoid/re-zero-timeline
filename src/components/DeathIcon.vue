@@ -1,6 +1,6 @@
 <template>
 <!-- eslint-disable max-len -->
-  <div class="death-event cursor-pointer">
+  <div class="death-event cursor-pointer transition duration-300 transform hover:scale-120">
     <svg
       version="1.1"
       id="Capa_1"
@@ -62,13 +62,9 @@ export default Vue.extend({
   left: 100%;
   & svg {
     transition: all .3s;
-    width: 16px;
-    height: 16px;
-    fill: #9b2c2c;
-    &:hover {
-      transition: all .3s;
-      fill: #805ad5;
-    }
+    width: 18px;
+    height: 18px;
+    fill: #ac3030;
   }
 }
 </style>
