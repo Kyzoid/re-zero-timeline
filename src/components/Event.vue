@@ -48,9 +48,10 @@ export default Vue.extend({
     complexity: Number,
     eventId: String,
     timeline: Number,
+    image: String,
   },
   mounted() {
-    const episodeFound = this.$data.episodes.find((episode: EpisodeType) => episode.code === this.$props.episode);
+    const episodeFound: EpisodeType = this.$data.episodes.find((episode: EpisodeType) => episode.code === this.$props.episode);
     tippy(`#${this.$props.eventId}`, {
       content: `
         <span class="font-bold">
@@ -67,6 +68,13 @@ export default Vue.extend({
       arrow: true,
       theme: 'translucent',
       animation: 'shift-away',
+      onShow: (instance) => {
+        const backgroundElement = document.querySelector('#app > #bg-img') as HTMLDivElement || null;
+        if (this.$props.image && backgroundElement) {
+          backgroundElement.style.backgroundImage = `url('${this.$props.image}')`;
+        }
+        console.log(instance);
+      },
     });
   },
   methods: {

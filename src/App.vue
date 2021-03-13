@@ -5,6 +5,8 @@
   @mouseup="handleMouseUp">
     <router-view name="header" />
     <router-view />
+    <div id="bg-img"></div>
+    <div id="bg-mask"></div>
   </div>
 </template>
 
@@ -51,5 +53,19 @@ export default Vue.extend({
 
   html, body {
     user-select: none;
+  }
+
+  #app > #bg-img {
+    z-index: -1;
+    opacity: .3;
+    transition: all .5s;
+    @apply top-0 left-0 h-full w-full bg-center bg-no-repeat bg-cover absolute;
+  }
+
+  #app > #bg-mask {
+    z-index: -1;
+    opacity: 1;
+    background-image: url('/images/bg-mask.png');
+    @apply top-0 left-0 h-full w-full bg-repeat absolute;
   }
 </style>

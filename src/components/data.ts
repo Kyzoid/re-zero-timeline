@@ -17,6 +17,7 @@ export default {
           timecode: '2:00',
           absoluteTC: '2:00',
           description: 'Subaru spawns next to the Lugnica fountain.',
+          image: '/images/events/subaru-spawns-lugnica.png',
         },
         {
           timeline: '1',
@@ -27,6 +28,7 @@ export default {
           absoluteTC: '3:43',
           description: 'Subaru talks to a merchant.',
           id: '1',
+          image: '/images/respawns/respawn-1.png',
         },
         {
           timeline: '1',
@@ -36,6 +38,7 @@ export default {
           timecode: '5:28',
           absoluteTC: '5:28',
           description: 'Subaru encounters three thugs in a dark alleyway. Emilia, who were chasing Felt, scares away the thugs and heals Subaru.',
+          image: '/images/events/alleyway-emilia.png',
         },
         {
           timeline: '1',
@@ -45,6 +48,7 @@ export default {
           timecode: '26:16',
           absoluteTC: '26:16',
           description: "Subaru and Emilia arrive at Rom's tavern but Subaru decides to enter alone.",
+          image: '/images/events/front-tavern.png',
         },
         {
           timeline: '1',
@@ -54,6 +58,7 @@ export default {
           timecode: '29:32',
           absoluteTC: '29:32',
           description: 'A woman hidden in the dark stabs Subaru. After hearing strange noises coming from the inside, Emilia enters the tavern and gets stabbed.',
+          image: '/images/deaths/death-1.png',
         },
       ],
     },
@@ -73,6 +78,7 @@ export default {
           timecode: '1:12',
           absoluteTC: '30:44',
           description: "Subaru doesn't understand what happened but he hurries to find Emilia. In the same alleyway, he encounters the three thugs but this time he kicks the shit out of them and rushes to the tavern.",
+          image: '/images/events/confused-subaru.png',
         },
         {
           timeline: '2',
@@ -82,6 +88,7 @@ export default {
           timecode: '3:04',
           absoluteTC: '32:36',
           description: "Subaru enters the tavern and negotiates with Rom, Felt and Elsa to buy back Emilia's badge.",
+          image: '/images/events/tavern-negotiations.png',
         },
         {
           timeline: '2',
@@ -91,6 +98,7 @@ export default {
           timecode: '18:22',
           absoluteTC: '47:54',
           description: 'After winning the negotiations, Subaru reveals his intentions to give back the badge to Emilia. Elsa does not agree and kills Rom, Felt and Subaru.',
+          image: '/images/deaths/death-2.png',
         },
       ],
     },
@@ -110,6 +118,7 @@ export default {
           timecode: '2:33',
           absoluteTC: '50:27',
           description: "Felt steals Emilia's insigna.",
+          image: '/images/events/felt-steals-insigna.png',
         },
         {
           timeline: '3',
@@ -119,6 +128,7 @@ export default {
           timecode: '5:46',
           absoluteTC: '53:40',
           description: 'Subaru is stabbed by the three thugs.',
+          image: '/images/deaths/death-3.png',
         },
       ],
     },
@@ -138,6 +148,7 @@ export default {
           timecode: '4:44',
           absoluteTC: '58:24',
           description: 'Subaru encounters the three thugs and screams for help.',
+          image: '/images/events/subaru-screams-alleyway.png',
         },
         {
           timeline: '4',
@@ -147,6 +158,7 @@ export default {
           timecode: '9:22',
           absoluteTC: '1:03:02',
           description: 'Subaru accidentally bumps into Elsa while looking for Felt.',
+          image: '/images/events/subaru-bumps-into-elsa.png',
         },
         {
           timeline: '4',
@@ -156,6 +168,7 @@ export default {
           timecode: '33:58',
           absoluteTC: '1:27:38',
           description: 'Subaru, Emilia, Rom, Felt and Reinhart fight Elsa.',
+          image: '/images/events/reinhart-fights-elsa.png',
         },
         {
           timeline: '4',
@@ -166,6 +179,7 @@ export default {
           absoluteTC: '1:43:07',
           description: 'Subaru wakes up with Rem and Ram at his bedside.',
           id: '2',
+          image: '/images/respawns/respawn-2.png',
         },
         {
           timeline: '4',
@@ -175,6 +189,7 @@ export default {
           timecode: '58:37',
           absoluteTC: '1:52:17',
           description: 'Roswaal grants a wish to Subaru for helping Emilia. He decides to become a butler for the mansion.',
+          image: '/images/events/subaru-becomes-butler.png',
         },
         {
           timeline: '4',
@@ -184,6 +199,7 @@ export default {
           timecode: '1:08:57',
           absoluteTC: '2:02:37',
           description: 'In the middle of the night of the 4th day, Subaru inexplicably dies in his sleep.',
+          image: '/images/deaths/death-4.png',
         },
       ],
     },
@@ -203,6 +219,7 @@ export default {
           timecode: '5:49',
           absoluteTC: '2:08:26',
           description: 'Subaru becomes a butler once again to do the same actions has the previous loop and understand who kill him.',
+          image: '/images/events/subaru-becomes-butler.png',
         },
         {
           timeline: '5',
@@ -212,6 +229,7 @@ export default {
           timecode: '15:43',
           absoluteTC: '2:18:20',
           description: 'Rem and Subaru go to the village next door.',
+          image: '/images/events/inside-village.png',
         },
         {
           timeline: '5',
@@ -221,6 +239,7 @@ export default {
           timecode: '25:13',
           absoluteTC: '2:27:50',
           description: 'In the middle of the night, Subaru feels sick and get out of his room. He hears chains in the distance and, without being able to retaliate, he is killed.',
+          image: '/images/deaths/death-5.png',
         },
       ],
     },
@@ -240,6 +259,7 @@ export default {
           timecode: '8:46',
           absoluteTC: '2:36:36',
           description: 'This time, Subaru becomes a guest to gather informations about the killer.',
+          image: '/images/events/subaru-becomes-guest.png',
         },
         {
           timeline: '6',
@@ -249,6 +269,7 @@ export default {
           timecode: '21:31',
           absoluteTC: '2:49:21',
           description: "After four days, Subaru leaves Roswaal's mansion to wait for the killer in the forest.",
+          image: '/images/events/subaru-forest-near-mansion.png',
         },
         {
           timeline: '6',
@@ -258,6 +279,7 @@ export default {
           timecode: '29:13',
           absoluteTC: '2:57:03',
           description: "Rem attacks Subaru because he stinks the Witch. She cuts Subaru's right leg and questions him. Ram finishes him off by cutting his throat.",
+          image: '/images/deaths/death-6.png',
         },
       ],
     },
@@ -277,6 +299,7 @@ export default {
           timecode: '1:11',
           absoluteTC: '2:58:14',
           description: 'Subaru tries to tell Emilia about his ability to respawn.',
+          image: '/images/events/subaru-tries-to-confess.png',
         },
         {
           timeline: '7',
@@ -286,6 +309,7 @@ export default {
           timecode: '4:17',
           absoluteTC: '3:01:20',
           description: 'Beatrice visits Subaru in his room. He asks for her protection until the morning of the fifth day.',
+          image: '/images/events/beatrice-protects-subaru.png',
         },
         {
           timeline: '7',
@@ -295,6 +319,7 @@ export default {
           timecode: '9:17',
           absoluteTC: '3:06:20',
           description: "On the morning of the 5th day, Subaru leaves Beatrice's library and finds Rem dead because of a curse.",
+          image: '/images/events/rem-cursed.png',
         },
         {
           timeline: '7',
@@ -304,6 +329,7 @@ export default {
           timecode: '20:02',
           absoluteTC: '3:17:05',
           description: 'Ram chases Subaru outside the mansion to kill him. Beatrice is still protection Subaru but he jumps off the cliff.',
+          image: '/images/deaths/death-7.png',
         },
       ],
     },
@@ -323,6 +349,7 @@ export default {
           timecode: '3:31',
           absoluteTC: '3:20:36',
           description: 'Subaru becomes a butler for the third time.',
+          image: '/images/events/subaru-becomes-butler-2.png',
         },
         {
           timeline: '8',
@@ -332,6 +359,7 @@ export default {
           timecode: '18:36',
           absoluteTC: '3:35:41',
           description: "Subaru struggles to hide his emotions and bursts into tears on Emilia's knees.",
+          image: '/images/events/subaru-on-emilia-lap.png',
         },
         {
           timeline: '8',
@@ -341,6 +369,7 @@ export default {
           timecode: '24:49',
           absoluteTC: '3:41:54',
           description: 'Subaru, Rem and Ram go to Irlam village.',
+          image: '/images/events/kids-laughing.png',
         },
         {
           timeline: '8',
@@ -350,6 +379,7 @@ export default {
           timecode: '32:38',
           absoluteTC: '3:49:43',
           description: 'Subaru and Rem quickly returns to the village because Beatrice tells him that the curse comes from it.',
+          image: '/images/events/subaru-rem-leaving-mansion.png',
         },
         {
           timeline: '8',
@@ -359,6 +389,7 @@ export default {
           timecode: '47:18',
           absoluteTC: '4:04:23',
           description: 'Subaru protects Rem and is severely wounded.',
+          image: '/images/events/subaru-attacked-by-dogs.png',
         },
         {
           timeline: '8',
@@ -368,6 +399,7 @@ export default {
           timecode: '1:00:40',
           absoluteTC: '4:17:45',
           description: 'To prevent Subaru from dying of his many curses, Rem goes alone in the forest to kill all the beast (Wolgarm). Ram and Subaru join her and Roswaal saves them.',
+          image: '/images/events/subaru-and-big-dog.png',
         },
         {
           timeline: '8',
@@ -377,6 +409,7 @@ export default {
           timecode: '1:44:26',
           absoluteTC: '5:01:31',
           description: 'Emilia, Subaru and Rem go to Lugnica.',
+          image: '/images/events/lugnica-road.png',
         },
         {
           timeline: '8',
@@ -386,6 +419,7 @@ export default {
           timecode: '1:55:24',
           absoluteTC: '5:12:29',
           description: 'The next day, Emilia and Roswaal return to Lugnica. Subaru goes to the capital even though Emilia said him not to.',
+          image: '/images/events/subaru-in-front-royal-castle.png',
         },
         {
           timeline: '8',
@@ -395,6 +429,7 @@ export default {
           timecode: '2:18:00',
           absoluteTC: '5:35:05',
           description: 'Subaru gets totaly smashed by Julius.',
+          image: '/images/events/subaru-smashed-by-julius.png',
         },
         {
           timeline: '8',
@@ -405,6 +440,7 @@ export default {
           absoluteTC: '5:52:40',
           description: 'Subaru and Rem talk to the apple vendor.',
           id: '3',
+          image: '/images/respawns/respawn-3.png',
         },
         {
           timeline: '8',
@@ -414,6 +450,7 @@ export default {
           timecode: '2:40:24',
           absoluteTC: '5:57:29',
           description: 'Subaru fails to convince Crusch to help him save Emilia.',
+          image: '/images/events/subaru-tries-convincing-crusch.png',
         },
         {
           timeline: '8',
@@ -423,6 +460,7 @@ export default {
           timecode: '2:47:54',
           absoluteTC: '6:04:59',
           description: 'Rem abandons Subaru and goes to the mansion alone.',
+          image: '/images/events/empty-room.png',
         },
         {
           timeline: '8',
@@ -432,6 +470,7 @@ export default {
           timecode: '2:56:35',
           absoluteTC: '6:13:40',
           description: 'Looking for Emilia, Subaru finds a secret corridor in the mansion and is freezed to death by Pack.',
+          image: '/images/deaths/death-8.png',
         },
       ],
     },
@@ -451,6 +490,7 @@ export default {
           timecode: '3:17',
           absoluteTC: '6:16:57',
           description: "Subaru's mind is completely broken, Rem decides to take him to Emilia.",
+          image: '/images/events/mad-subaru-hugs-rem.png',
         },
         {
           timeline: '9',
@@ -460,6 +500,7 @@ export default {
           timecode: '11:11',
           absoluteTC: '6:24:51',
           description: 'Rem tries to save Subaru from Betelgeuse.',
+          image: '/images/events/twisted-rem.png',
         },
         {
           timeline: '9',
@@ -469,6 +510,7 @@ export default {
           timecode: '18:42',
           absoluteTC: '6:32:22',
           description: 'Subaru arrives at the mansion, an enourmous creature emerges from the mansion, freezes and beheads Subaru.',
+          image: '/images/deaths/death-9.png',
         },
       ],
     },
@@ -488,6 +530,7 @@ export default {
           timecode: '4:03',
           absoluteTC: '6:36:25',
           description: 'Subaru tries to convince Crusch to help him save Emilia.',
+          image: '/images/events/subaru-tries-convincing-crusch-2.png',
         },
         {
           timeline: '10',
@@ -497,6 +540,7 @@ export default {
           timecode: '14:02',
           absoluteTC: '6:46:24',
           description: 'Subaru fails to convince Priscilla to help him save Emilia.',
+          image: '/images/events/angry-priscilla.png',
         },
         {
           timeline: '10',
@@ -506,6 +550,7 @@ export default {
           timecode: '20:28',
           absoluteTC: '6:52:50',
           description: 'Subaru fails to convince Anastasia to help him save Emilia.',
+          image: '/images/events/subaru-talks-with-anastasia.png',
         },
         {
           timeline: '10',
@@ -514,7 +559,8 @@ export default {
           episodeRelativeTC: '5:06',
           timecode: '32:32',
           absoluteTC: '7:04:54',
-          description: 'Rem sacrufuces herself to allow Subaru to flee the Great Whale.',
+          description: 'Rem sacrifices herself to allow Subaru to flee the Great Whale.',
+          image: '/images/events/rem-great-whale.png',
         },
         {
           timeline: '10',
@@ -524,6 +570,7 @@ export default {
           timecode: '46:22',
           absoluteTC: '7:18:44',
           description: 'Subaru tries to tell Emilia about his ability to respawn, but the Witch of Envy kills her.',
+          image: '/images/events/subaru-holds-emilia.png',
         },
         {
           timeline: '10',
@@ -533,6 +580,7 @@ export default {
           timecode: '55:42',
           absoluteTC: '7:28:04',
           description: 'Subaru is attacked by the Cult, Pack kills everyone.',
+          image: '/images/deaths/death-10.png',
         },
       ],
     },
@@ -552,6 +600,7 @@ export default {
           timecode: '29:30',
           absoluteTC: '7:57:34',
           description: 'Subaru convinces Anastasia and Crusch to help him save Emilia from the cult.',
+          image: '/images/events/subaru-shakes-hands-with-crusch.png',
         },
         {
           timeline: '11',
@@ -561,6 +610,7 @@ export default {
           timecode: '45:15',
           absoluteTC: '8:13:19',
           description: "Subaru's phone starts ringing, the fight with the White Whale begins.",
+          image: '/images/events/great-whale.png',
         },
         {
           timeline: '11',
@@ -570,6 +620,7 @@ export default {
           timecode: '1:26:18',
           absoluteTC: '8:54:22',
           description: 'Willhem finishes off the White Whale.',
+          image: '/images/events/great-whale-eye.png',
         },
         {
           timeline: '11',
@@ -580,6 +631,7 @@ export default {
           absoluteTC: '9:05:27',
           description: 'Subaru briefs his unit before going to Roswaal Mansion.',
           id: '4',
+          image: '/images/respawns/respawn-4.png',
         },
         {
           timeline: '11',
@@ -589,6 +641,7 @@ export default {
           timecode: '1:47:12',
           absoluteTC: '9:15:16',
           description: 'Willhem kills Betelgeuse by surprise while Subaru makes the bait.',
+          image: '/images/events/willhem-kills-betelgeuse.png',
         },
         {
           timeline: '11',
@@ -598,6 +651,7 @@ export default {
           timecode: '2:24:47',
           absoluteTC: '9:52:51',
           description: "Betelgeuse takes control of Subaru's body, Ferris immobilizes Subaru and Julius finishes him.",
+          image: '/images/deaths/death-11-2.png',
         },
       ],
     },
@@ -617,6 +671,7 @@ export default {
           timecode: '18:07',
           absoluteTC: '10:10:58',
           description: 'Subaru provokes Betelgeuse and the chase begins.',
+          image: '/images/events/subaru-chased-by-betelgeuse.png',
         },
         {
           timeline: '12',
@@ -626,6 +681,7 @@ export default {
           timecode: '41:58',
           absoluteTC: '10:34:49',
           description: "Subaru takes away all the magic stones of fire that were hidden in Emilia's carriage to make them blow up away from anyone.",
+          image: '/images/events/explosion.png',
         },
         {
           timeline: '12',
@@ -636,6 +692,7 @@ export default {
           absoluteTC: '10:48:40',
           description: 'Subaru talks about Rem with Emilia in the horse-drawn cart. Crusch unit is attacked by greed and gluttony archbishops.',
           id: '5',
+          image: '/images/events/',
         },
         {
           timeline: '12',
@@ -645,6 +702,7 @@ export default {
           timecode: '1:05:47',
           absoluteTC: '10:58:38',
           description: 'Subaru kills himself by sticking a knife in his throat after seeing Rem dead.',
+          image: '/images/events/',
         },
       ],
     },
@@ -664,6 +722,7 @@ export default {
           timecode: '34:46',
           absoluteTC: '11:33:24',
           description: 'Subaru, Emilia and Otto head towards the Sanctuary of Kremaldy to join Roswaal.',
+          image: '/images/events/',
         },
         {
           timeline: '13',
@@ -673,6 +732,7 @@ export default {
           timecode: '38:32',
           absoluteTC: '11:37:10',
           description: "Subaru is invoked in Echidna's tea party.",
+          image: '/images/events/',
         },
         {
           timeline: '13',
@@ -682,6 +742,7 @@ export default {
           timecode: '55:38',
           absoluteTC: '11:54:16',
           description: 'Subaru and Emilia talk to a wrapped in bandage Roswaal and learn that they are all stuck in the Sanctuary until someone succesfully passes all 3 trials.',
+          image: '/images/events/',
         },
         {
           timeline: '13',
@@ -692,6 +753,7 @@ export default {
           absoluteTC: '12:39:59',
           description: 'Subaru successfully passes the first step of Echidna temple.',
           id: '6',
+          image: '/images/events/',
         },
         {
           timeline: '13',
@@ -701,6 +763,7 @@ export default {
           timecode: '1:58:15',
           absoluteTC: '12:56:53',
           description: 'Subaru guides the villagers who can leave the Sanctuary and returns to the mansion to check that everything is okay.',
+          image: '/images/events/',
         },
         {
           timeline: '13',
@@ -710,6 +773,7 @@ export default {
           timecode: '2:01:33',
           absoluteTC: '13:00:11',
           description: 'Elsa rip open Subaru by surprise in the mansion.',
+          image: '/images/events/',
         },
       ],
     },
@@ -729,6 +793,7 @@ export default {
           timecode: '8:21',
           absoluteTC: '13:08:32',
           description: 'Ram and Subaru return to the mansion.',
+          image: '/images/events/',
         },
         {
           timeline: '14',
@@ -738,6 +803,7 @@ export default {
           timecode: '16:27',
           absoluteTC: '13:16:38',
           description: 'Elsa arrives at the mansion with Petra in hostage.',
+          image: '/images/events/',
         },
         {
           timeline: '14',
@@ -747,6 +813,7 @@ export default {
           timecode: '31:23',
           absoluteTC: '13:31:34',
           description: "Elsa enters Beatrice's library and kills Subaru.",
+          image: '/images/events/',
         },
       ],
     },
@@ -766,6 +833,7 @@ export default {
           timecode: '9:09',
           absoluteTC: '13:40:43',
           description: 'Lews Cima and Garfiel lock up Subaru inside an underground dungeon.',
+          image: '/images/events/',
         },
         {
           timeline: '15',
@@ -775,6 +843,7 @@ export default {
           timecode: '38:23',
           absoluteTC: '14:09:57',
           description: 'Subaru is eatten alive by the Great Rabbit.',
+          image: '/images/events/',
         },
       ],
     },
@@ -794,6 +863,7 @@ export default {
           timecode: '0:37',
           absoluteTC: '14:10:34',
           description: "Subaru is invoked in Echidna's tea party for the second time.",
+          image: '/images/events/',
         },
         {
           timeline: '16',
@@ -803,6 +873,7 @@ export default {
           timecode: '14:47',
           absoluteTC: '14:24:44',
           description: 'Subaru meets Typhon (Witch of Pride), Minerva (Witch of Wrath) and Daphne (Witch of Gluttony).',
+          image: '/images/events/',
         },
         {
           timeline: '16',
@@ -812,6 +883,7 @@ export default {
           timecode: '27:37',
           absoluteTC: '14:37:34',
           description: 'As Subaru exits the temple, Satella appears right in front of him.',
+          image: '/images/events/',
         },
         {
           timeline: '16',
@@ -821,6 +893,7 @@ export default {
           timecode: '36:31',
           absoluteTC: '14:46:28',
           description: "Satella swallows Subaru, he is forced to commit suicide with Echidna's blessing.",
+          image: '/images/events/',
         },
       ],
     },
@@ -840,6 +913,7 @@ export default {
           timecode: '32:17',
           absoluteTC: '15:18:45',
           description: "Beatrice is stabbed by Elsa and Subaru is teleported back to Echidna's temple.",
+          image: '/images/events/',
         },
         {
           timeline: '17',
@@ -849,6 +923,7 @@ export default {
           timecode: '47:52',
           absoluteTC: '15:34:20',
           description: "Roswaal is eaten by the Great Rabbit and Subaru dies in Emilia's arms inside Echidna's temple.",
+          image: '/images/events/',
         },
       ],
     },
@@ -868,6 +943,7 @@ export default {
           timecode: '12:36',
           absoluteTC: '15:46:56',
           description: 'Subaru enters the temple to talk to Echidna, but the second trial begins. Echidna save Subaru before he loses his mind.',
+          image: '/images/events/',
         },
         {
           timeline: '18',
@@ -877,6 +953,7 @@ export default {
           timecode: '48:09',
           absoluteTC: '16:22:29',
           description: 'Roswaal reveals that he is the one who hired the assassin attacking the mansion.',
+          image: '/images/events/',
         },
       ],
     },

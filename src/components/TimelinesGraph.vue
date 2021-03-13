@@ -1,7 +1,5 @@
-// TODO: Add background style
-// TODO: Refactor: make a created hook that retrieve DOM elements that are later use in methods
 <template>
-  <div class="timelines relative bg-rz-700 flex flex-col justify-between"
+  <div class="timelines relative flex flex-col justify-between"
   >
     <div
       @mousedown="handleMouseDown"
@@ -33,6 +31,7 @@
             :episode="event.episode"
             :episodeRelativeTC="event.episodeRelativeTC"
             :description="event.description"
+            :image="event.image"
             :timeline="timeline.id"
           >
           </Event>

@@ -8,6 +8,7 @@ export type EventType = {
   description: string;
   position?: string;
   id?: string;
+  image?: string;
 }
 
 export type RespawnPointType = {
