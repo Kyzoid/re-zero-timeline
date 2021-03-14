@@ -77,7 +77,7 @@ export default Vue.extend({
   },
   methods: {
     updateTreeGeneration() {
-      console.log('ok');
+      throw new Error('TimelinesGraph@updateTreeGeneration() not implemented.');
     },
     toTimecode(seconds: number): string {
       const timecode = new Date(seconds * 1000).toISOString().substr(11, 8);
@@ -111,6 +111,16 @@ export default Vue.extend({
       if (!_.isEqual(this.$data.calculatedTimelines, calculatedTimelines)) {
         this.$data.calculatedTimelines = calculatedTimelines;
         this.$forceUpdate();
+        const lastTimelineWithEvents = calculatedTimelines[calculatedTimelines.length - 1].events.length
+          ? calculatedTimelines[calculatedTimelines.length - 1]
+          : calculatedTimelines[calculatedTimelines.length - 2];
+        const backgroundElement = document.getElementById('bg-img');
+        if (lastTimelineWithEvents && backgroundElement) {
+          const lastEvent = lastTimelineWithEvents.events[lastTimelineWithEvents.events.length - 1];
+          if (lastEvent && lastEvent.image) {
+            backgroundElement.style.backgroundImage = `url('${lastEvent.image}')`;
+          }
+        }
       }
     },
     calculateTimelines(timecodeValue: string): TimelineType[] {

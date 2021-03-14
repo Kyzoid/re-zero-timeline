@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" class="py-2 transparent text-white">
+  <div id="nav" class="py-2 transparent text-white top-bar-gradient">
     <div class="mx-4 flex justify-between">
       <router-link to="/" class="re-zero font-bold text-black text-lg">
         <img src="/images/re-zero.png" width="220" />
@@ -8,7 +8,7 @@
         <li>
           <router-link
             to="/about"
-            class="py-1 border-b-2 border-transparent hover:text-rz-logo-100 hover:border-rz-logo-100 transition duration-300 uppercase"
+            class="py-1 border-b-2 border-transparent hover:border-rz-logo-100 transition duration-300 uppercase"
             >:About</router-link
           >
         </li>
@@ -28,5 +28,10 @@ export default Vue.extend({
 <style lang="postcss" scoped>
 .re-zero {
   text-shadow: 0 0 1px white;
+}
+
+.top-bar-gradient {
+  background: rgb(0,0,0);
+  background: linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 100%);
 }
 </style>

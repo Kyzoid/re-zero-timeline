@@ -8,7 +8,7 @@
           <div
             v-for="episode in computedEpisodes"
             :key="episode.id"
-            class="chapter relative h-full bg-white bg-opacity-50
+            class="chapter relative h-full bg-white bg-opacity-25
             transform hover:scale-y-180 items-start transition duration-100"
             @mouseover="handleHoverEnter"
             @mousemove="handleMove"
@@ -17,11 +17,11 @@
             :style="`width:${episode.width}%; margin-right: ${episode.id !== 39 ? '2px' : '0px'};`"
           >
             <div
-              class="play-progress z-2 absolute left-0 h-full bg-purple-700 pointer-events-none"
+              class="play-progress z-2 absolute left-0 h-full bg-rz-logo-100 pointer-events-none"
               style="width: 0%"
             ></div>
             <div
-              class="hover-progress z-1 absolute left-0 h-full bg-gray-200 bg-opacity-75 pointer-events-none"
+              class="hover-progress z-1 absolute left-0 h-full bg-gray-300 bg-opacity-50 pointer-events-none"
               style="width: 0%"
             ></div>
           </div>
@@ -33,7 +33,7 @@
             <div id="tooltip-timer">00:00</div>
           </div>
         </div>
-        <div class="thumb absolute bg-purple-700 pointer-events-none"
+        <div class="thumb absolute bg-rz-logo-100 pointer-events-none"
         style="left: -6.5px;"></div>
         <div class="hover-thumb absolute bg-gray-600 pointer-events-none"
         style="left: -6.5px;"></div>

@@ -76,6 +76,12 @@ module.exports = {
       },
       'github': {
         100: '#A147AC',
+      },
+      'reddit': {
+        100: '#FF4500',
+      },
+      'twitter': {
+        100: '#31A9F3',
       }
     },
   },

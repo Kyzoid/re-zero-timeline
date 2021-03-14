@@ -692,7 +692,7 @@ export default {
           absoluteTC: '10:48:40',
           description: 'Subaru talks about Rem with Emilia in the horse-drawn cart. Crusch unit is attacked by greed and gluttony archbishops.',
           id: '5',
-          image: '/images/events/subaru-emilia-talk-in-cart.png',
+          image: '/images/respawns/respawn-5.png',
         },
         {
           timeline: '12',
@@ -753,7 +753,7 @@ export default {
           absoluteTC: '12:39:59',
           description: 'Subaru successfully passes the first step of Echidna temple.',
           id: '6',
-          image: '/images/events/students-echidna-subaru.png',
+          image: '/images/respawns/respawn-6.png',
         },
         {
           timeline: '13',

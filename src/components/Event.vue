@@ -73,7 +73,6 @@ export default Vue.extend({
         if (this.$props.image && backgroundElement) {
           backgroundElement.style.backgroundImage = `url('${this.$props.image}')`;
         }
-        console.log(instance);
       },
     });
   },

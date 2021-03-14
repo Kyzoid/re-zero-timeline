@@ -5,7 +5,7 @@
   @mouseup="handleMouseUp">
     <router-view name="header" />
     <router-view />
-    <div id="bg-img"></div>
+    <div id="bg-img" style="background-image: url('/images/events/subaru-spawns-lugnica.png')"></div>
     <div id="bg-mask"></div>
   </div>
 </template>

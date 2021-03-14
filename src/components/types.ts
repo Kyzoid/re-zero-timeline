@@ -21,6 +21,7 @@ export type RespawnPointType = {
   description: string;
   position?: string;
   id: string;
+  image?: string;
 }
 
 export type TimelineType = {
