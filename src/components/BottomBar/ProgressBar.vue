@@ -11,6 +11,7 @@
             class="chapter relative h-full bg-white bg-opacity-25
             transform hover:scale-y-180 items-start transition duration-100"
             @mouseover="handleHoverEnter"
+            @mousedown="handleMouseDown"
             @mousemove="handleMove"
             @click="handleClick"
             :data-id="episode.id"
@@ -54,9 +55,13 @@ export default Vue.extend({
     min: Number,
     max: Number,
   },
+  created() {
+    document.addEventListener('mouseup', () => { this.isMouseDown = false; });
+  },
   data: () => ({
     episodes: data.episodes,
     progressBarWidth: 0,
+    isMouseDown: false,
   }),
   computed: {
     computedEpisodes(): EpisodeType[] {
@@ -75,6 +80,9 @@ export default Vue.extend({
   },
   inject: ['toTimecode', 'toSeconds'],
   methods: {
+    handleMouseDown() {
+      this.isMouseDown = true;
+    },
     handleResize() {
       const newProgressBarWidth = this.progressBar.getBoundingClientRect().width;
 
@@ -189,7 +197,7 @@ export default Vue.extend({
       const progress = Math.abs(Math.round(((mouseX - targetLeft) / targetWidth) * 100));
       this.setHoverThumbPosition(mouseX, target, progress);
       this.setTooltipPosition(mouseX);
-      if (this.$store.state.bottomBarIsMouseDown) {
+      if (this.isMouseDown) {
         this.setThumbPosition(mouseX, target, progress);
       }
     },

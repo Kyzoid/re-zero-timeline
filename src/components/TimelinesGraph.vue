@@ -3,7 +3,6 @@
   >
     <div
       @mousedown="handleMouseDown"
-      @mouseup="handleMouseUp"
       @mousemove="handleMouseMove"
       id="timeline-graph"
       class="h-full
@@ -60,6 +59,9 @@ export default Vue.extend({
     Timeline,
     TimelineJoint,
     BottomBar,
+  },
+  created() {
+    document.addEventListener('mouseup', this.handleMouseUp);
   },
   data: () => ({
     ratio: 5, // represents the number of seconds for 1px
@@ -257,25 +259,6 @@ export default Vue.extend({
         if ((timelineGraph.scrollTop + scrollByValueY) >= 0) {
           timelineGraph.scrollBy(0, scrollByValueY);
         }
-
-        this.handleMouseLeave(timelineGraph, event);
-      }
-    },
-
-    handleMouseLeave(element: HTMLElement, { clientX, clientY }: MouseEvent) {
-      const {
-        x, y, width, height,
-      } = element.getBoundingClientRect();
-      const offset = 3;
-      if (
-        (clientX - offset) <= x
-        || (clientY - offset) <= y
-        || (clientX + offset) >= (x + width)
-        || (clientY + offset) >= (y + height)
-      ) {
-        // eslint-disable-next-line no-param-reassign
-        element.style.cursor = 'inherit';
-        this.$data.isDrawing = false;
       }
     },
   },
