@@ -2,22 +2,31 @@
   <div id="settings">
     <SettingsPanel
       id="settings-panel"
+      ref="settingsPanel"
       class="absolute right-0 opacity-0"
       style="bottom: 64px; right: 8px;"
     />
     <SettingsIcon
       id="settings-icon"
+      ref="settingsIcon"
       class="ml-2 transform duration-500"
     />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { VueConstructor } from 'vue';
 import SettingsPanel from './SettingsPanel.vue';
 import SettingsIcon from './SettingsIcon.vue';
 
-export default Vue.extend({
+export default (Vue as VueConstructor<
+  Vue & {
+    $refs: {
+      settingsIcon: HTMLElement;
+      settingsPanel: HTMLElement;
+    };
+  }
+  >).extend({
   name: 'Settings',
   components: {
     SettingsPanel,
@@ -25,8 +34,7 @@ export default Vue.extend({
   },
   methods: {
     handleSettingsIconClick() {
-      const settingsPanel = document.getElementById('settings-panel') as HTMLElement;
-      const settingsIcon = document.getElementById('settings-icon') as HTMLElement;
+      const { settingsPanel, settingsIcon } = this.$refs;
       const isShown = Object.values(settingsPanel.classList).includes('opacity-100');
       if (isShown) {
         settingsPanel.classList.add('invisible');

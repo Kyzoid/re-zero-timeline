@@ -5,6 +5,7 @@
       @mousedown="handleMouseDown"
       @mousemove="handleMouseMove"
       id="timeline-graph"
+      ref="timelineGraph"
       class="h-full
       flex flex-col justify-center h-64 overflow-scroll"
     >
@@ -42,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { VueConstructor } from 'vue';
 import _ from 'lodash';
 import Event from './Event.vue';
 import Timeline from './Timeline.vue';
@@ -52,7 +53,13 @@ import { EventType, RespawnPointType, TimelineType } from './types';
 
 import data from './data';
 
-export default Vue.extend({
+export default (Vue as VueConstructor<
+  Vue & {
+    $refs: {
+      timelineGraph: HTMLDivElement;
+    };
+  }
+  >).extend({
   name: 'TimelinesGraph',
   components: {
     Event,
@@ -178,7 +185,7 @@ export default Vue.extend({
 
     getTimelinePosition(timeline: TimelineType): number {
       const respawnPoint = document.querySelector(`[data-respawn-id='${timeline.respawnId}'] > div`) as HTMLElement | null;
-      const timelineGraph = document.getElementById('timeline-graph') as HTMLElement | null;
+      const { timelineGraph } = this.$refs;
       let value = 0;
       if (respawnPoint !== null && timelineGraph !== null) {
         const respawnPointPositions = respawnPoint.getBoundingClientRect();
@@ -227,7 +234,7 @@ export default Vue.extend({
 
     handleMouseDown(event: MouseEvent) {
       event.preventDefault();
-      const timelineGraph = document.getElementById('timeline-graph') as HTMLElement;
+      const { timelineGraph } = this.$refs;
       timelineGraph.style.cursor = 'all-scroll';
       this.$data.isDrawing = true;
       this.setLastClient(event);
@@ -235,15 +242,17 @@ export default Vue.extend({
 
     handleMouseUp(event: MouseEvent) {
       event.preventDefault();
-      const timelineGraph = document.getElementById('timeline-graph') as HTMLElement;
-      timelineGraph.style.cursor = 'inherit';
+      const { timelineGraph } = this.$refs;
+      if (timelineGraph) {
+        timelineGraph.style.cursor = 'inherit';
+      }
       this.$data.isDrawing = false;
     },
 
     handleMouseMove(event: MouseEvent) {
       event.preventDefault();
       if (this.$data.isDrawing) {
-        const timelineGraph = document.getElementById('timeline-graph') as HTMLElement;
+        const { timelineGraph } = this.$refs;
         const { clientX, clientY } = event;
         const { lastClientX, lastClientY } = this.$data;
 
@@ -271,7 +280,7 @@ export default Vue.extend({
   updated() {
     this.$nextTick(() => {
       this.positionTimelines();
-      const timelineGraph = document.getElementById('timeline-graph') as HTMLElement | null;
+      const { timelineGraph } = this.$refs;
       if (timelineGraph) {
         timelineGraph.scroll({
           top: 9999999,
