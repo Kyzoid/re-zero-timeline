@@ -66,6 +66,7 @@ export default Vue.extend({
       const episode = this.$data.episodes[episodeIndex];
       if (episode) {
         episodeIdElement.textContent = episode.code;
+        episodeIdElement.dataset.episodeId = episode.code;
         episodeTitleElement.textContent = episode.title;
       }
       this.updateEpisodeTimeElapsed(episodeIndex, timeElapsedInputValue);

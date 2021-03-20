@@ -55,9 +55,6 @@ export default Vue.extend({
     min: Number,
     max: Number,
   },
-  created() {
-    document.addEventListener('mouseup', () => { this.isMouseDown = false; });
-  },
   data: () => ({
     episodes: data.episodes,
     progressBarWidth: 0,
@@ -85,16 +82,19 @@ export default Vue.extend({
     },
     handleResize() {
       const newProgressBarWidth = this.progressBar.getBoundingClientRect().width;
-
       const thumb = document.querySelector('.thumb') as HTMLDivElement;
-      const thumbLeft = thumb.getBoundingClientRect().left - 8;
-      const newThumbPosition = (thumbLeft / this.progressBarWidth) * newProgressBarWidth;
-      thumb.style.left = `${newThumbPosition}px`;
+      const thumbRadius = thumb.getBoundingClientRect().width / 2;
+      const leftOffset = 8;
+
+      const currentEpisode = (document.getElementById('episode-id') as HTMLSpanElement).dataset.episodeId;
+      if (currentEpisode) {
+        const currentChapter = document.querySelector(`.chapter[data-id='${+currentEpisode + 1}']`) as HTMLDivElement;
+        const { right: playProgressRight } = (currentChapter.querySelector('.play-progress') as HTMLDivElement).getBoundingClientRect();
+        thumb.style.left = `${playProgressRight - thumbRadius - leftOffset}px`;
+      }
 
       const hoverThumb = document.querySelector('.hover-thumb') as HTMLDivElement;
-      const hoverThumbLeft = hoverThumb.getBoundingClientRect().left - 8;
-      const newHoverThumbPosition = (hoverThumbLeft / this.progressBarWidth) * newProgressBarWidth;
-      hoverThumb.style.left = `${newHoverThumbPosition}px`;
+      hoverThumb.style.left = '0px';
 
       this.progressBarWidth = newProgressBarWidth;
     },
@@ -210,6 +210,7 @@ export default Vue.extend({
     },
   },
   mounted() {
+    window.addEventListener('mouseup', () => { this.isMouseDown = false; });
     window.addEventListener('resize', this.handleResize);
     this.progressBarWidth = this.progressBar.getBoundingClientRect().width;
   },
