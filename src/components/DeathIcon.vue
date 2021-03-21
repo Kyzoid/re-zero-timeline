@@ -1,11 +1,12 @@
 <template>
 <!-- eslint-disable max-len -->
-  <div class="death-event cursor-pointer transition duration-300 transform hover:scale-120">
+  <div class="death-event cursor-pointer transition duration-300">
     <svg
       version="1.1"
       id="Capa_1"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 612 612"
+      class="fill-current text-red-800 hover:text-red-600"
     >
       <path
         d="M122.855,335.491c3.514,11.463,7.147,23.318,8.96,35.258c0.741,4.866,3.647,40.261,5.218,59.707
@@ -64,7 +65,6 @@ export default Vue.extend({
     transition: all .3s;
     width: 18px;
     height: 18px;
-    fill: #ac3030;
   }
 }
 </style>

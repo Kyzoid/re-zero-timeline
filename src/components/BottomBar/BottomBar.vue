@@ -1,6 +1,6 @@
 <template>
   <div id="progress-bar"
-  class="text-white z-50 bottom-bar-gradient w-full bottom-0 p-2 text-sm"
+  class="text-white bottom-bar-gradient w-full bottom-0 p-2 text-sm"
   >
     <ProgressBar class="mb-2 mt-1"
     v-on:play-progress-change="updateBarInfo"

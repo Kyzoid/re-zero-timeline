@@ -2,17 +2,26 @@
   <div class="relative w-full h-10 flex items-center">
     <div
     class="timeline relative flex items-center transition duration-300
-    loop h-1 bg-rz-logo-100 hover:bg-subaru-100 w-full">
+    loop h-1 bg-rz-logo-100 hover:bg-subaru-100 w-full"
+    ref="timeline">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { VueConstructor } from 'vue';
 
-export default Vue.extend({
+export default (Vue as VueConstructor<
+  Vue & {
+    $refs: {
+      timeline: HTMLDivElement;
+    };
+  }
+  >).extend({
   name: 'Timeline',
+  methods: {
+  },
 });
 </script>
 

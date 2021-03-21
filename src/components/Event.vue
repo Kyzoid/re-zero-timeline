@@ -1,18 +1,17 @@
 <template>
-  <div class="event absolute pl-1 flex items-center">
-    <div :id="eventId" class="z-20">
-      <div
-        v-if="type === 'Event'"
-        class="respawn-point border-2 hover:border-subaru-100 border-transparent rounded-full w-6 h-6 transition duration-300
-        cursor-pointer transition duration-300 flex items-center justify-center transform hover:scale-120"
-        >
-        <div class="bg-rz-logo-100 rounded-full w-4 h-4
-          cursor-pointer transition duration-300">
-        </div>
+  <div class="event z-40 absolute pl-1 flex items-center">
+    <div
+      v-if="type === 'Event'"
+      :id="eventId"
+      class="event-type border-2 hover:border-subaru-100 border-transparent rounded-full w-6 h-6 transition duration-300
+      cursor-pointer transition duration-300 flex items-center justify-center"
+      >
+      <div class="bg-rz-logo-100 rounded-full w-4 h-4
+        cursor-pointer transition duration-300">
       </div>
-      <DeathIcon v-if="type === 'Death'"/>
-      <RespawnPoint :data-complexity="complexity" v-if="type === 'RespawnPoint'" />
     </div>
+    <DeathIcon v-if="type === 'Death'" :id="eventId"/>
+    <RespawnPoint :data-complexity="complexity" v-if="type === 'RespawnPoint'" :id="eventId" />
   </div>
 </template>
 
@@ -68,7 +67,7 @@ export default Vue.extend({
       arrow: true,
       theme: 'translucent',
       animation: 'shift-away',
-      onShow: (instance) => {
+      onShow: () => {
         const backgroundElement = document.querySelector('#app > #bg-img') as HTMLDivElement || null;
         if (this.$props.image && backgroundElement) {
           backgroundElement.style.backgroundImage = `url('${this.$props.image}')`;
@@ -91,7 +90,7 @@ export default Vue.extend({
 </script>
 
 <style lang="postcss" scoped>
-  .respawn-point:hover > div {
+  .event-type:hover > div {
     @apply bg-subaru-100;
   }
 </style>

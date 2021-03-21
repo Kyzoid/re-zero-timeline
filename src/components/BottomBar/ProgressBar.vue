@@ -19,11 +19,11 @@
             :style="`width:${episode.width}%; margin-right: ${episode.id !== 39 ? '2px' : '0px'};`"
           >
             <div
-              class="play-progress z-2 absolute left-0 h-full bg-rz-logo-100 pointer-events-none"
+              class="play-progress z-20 absolute left-0 h-full bg-rz-logo-100 pointer-events-none"
               style="width: 0%"
             ></div>
             <div
-              class="hover-progress z-1 absolute left-0 h-full bg-gray-300 bg-opacity-50 pointer-events-none"
+              class="hover-progress z-10 absolute left-0 h-full bg-gray-300 bg-opacity-50 pointer-events-none"
               style="width: 0%"
             ></div>
           </div>
@@ -121,6 +121,10 @@ export default (Vue as VueConstructor<
       return this.getChapters()
         .filter((chapter: HTMLDivElement) => chapter.dataset.id && +chapter.dataset.id < chapterIndex);
     },
+    getNextChapters(chapterIndex: number) {
+      return this.getChapters()
+        .filter((chapter: HTMLDivElement) => chapter.dataset.id && +chapter.dataset.id > chapterIndex);
+    },
     setProgress(chapters: HTMLDivElement[], width: number, type: string, progressPosition?: number) {
       chapters.forEach((chapter) => {
         const progress = (type === 'hover')
@@ -193,8 +197,10 @@ export default (Vue as VueConstructor<
       const { id: chapterIndex } = target.dataset;
       if (chapterIndex) {
         const previousChapters = this.getPreviousChapters(+chapterIndex);
+        const nextChapters = this.getNextChapters(+chapterIndex);
         const { x: mouseX } = event;
         this.setProgress(previousChapters, 100, 'hover', mouseX - 8);
+        this.setProgress(nextChapters, 0, 'hover', mouseX - 8);
       }
     },
     handleHoverLeave(event: MouseEvent) {

@@ -4,10 +4,17 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {
+  state: {
+    zIndex: 9,
   },
-  modules: {
+  mutations: {
+    addZIndex(state) {
+      state.zIndex += 1;
+    },
+    removeZIndex(state) {
+      state.zIndex -= 1;
+    },
   },
+  actions: {},
+  modules: {},
 });
