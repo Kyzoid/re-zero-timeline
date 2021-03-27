@@ -123,11 +123,19 @@ export default (Vue as VueConstructor<
         const lastTimelineWithEvents = calculatedTimelines[calculatedTimelines.length - 1].events.length
           ? calculatedTimelines[calculatedTimelines.length - 1]
           : calculatedTimelines[calculatedTimelines.length - 2];
-        const backgroundElement = document.getElementById('bg-img');
-        if (lastTimelineWithEvents && backgroundElement) {
+        if (lastTimelineWithEvents) {
           const lastEvent = lastTimelineWithEvents.events[lastTimelineWithEvents.events.length - 1];
           if (lastEvent && lastEvent.image) {
-            backgroundElement.style.backgroundImage = `url('${lastEvent.image}')`;
+            const nextBgActive = document.querySelector(`#bg-img > img[data-src='${lastEvent.image}']`) as HTMLImageElement || null;
+            const bgActive = document.querySelector('#bg-img > .bg-active') as HTMLImageElement || null;
+
+            if (nextBgActive && bgActive && nextBgActive !== bgActive) {
+              nextBgActive.classList.remove('hidden');
+              nextBgActive.classList.add('bg-active');
+
+              bgActive.classList.remove('bg-active');
+              bgActive.classList.add('hidden');
+            }
           }
         }
       }
