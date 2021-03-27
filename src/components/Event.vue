@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { VueConstructor } from 'vue';
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/translucent.css';
@@ -27,13 +27,18 @@ import { EpisodeType } from './types';
 
 import data from './data';
 
-export default Vue.extend({
+export default (Vue as VueConstructor<
+  Vue & {
+    changeBgImage: Function;
+  }
+  >).extend({
   name: 'Event',
   data() {
     return {
       episodes: data.episodes,
     };
   },
+  inject: ['changeBgImage'],
   components: {
     DeathIcon,
     RespawnPoint,
@@ -68,9 +73,8 @@ export default Vue.extend({
       theme: 'translucent',
       animation: 'shift-away',
       onShow: () => {
-        const backgroundElement = document.querySelector('#app > #bg-img') as HTMLDivElement || null;
-        if (this.$props.image && backgroundElement) {
-          backgroundElement.style.backgroundImage = `url('${this.$props.image}')`;
+        if (this.$props.image) {
+          this.changeBgImage(this.$props.image);
         }
       },
     });

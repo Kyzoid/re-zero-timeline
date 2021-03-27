@@ -82,6 +82,7 @@ export default (Vue as VueConstructor<
     return {
       toSeconds: this.toSeconds,
       toTimecode: this.toTimecode,
+      changeBgImage: this.changeBgImage,
     };
   },
   methods: {
@@ -126,18 +127,21 @@ export default (Vue as VueConstructor<
         if (lastTimelineWithEvents) {
           const lastEvent = lastTimelineWithEvents.events[lastTimelineWithEvents.events.length - 1];
           if (lastEvent && lastEvent.image) {
-            const nextBgActive = document.querySelector(`#bg-img > img[data-src='${lastEvent.image}']`) as HTMLImageElement || null;
-            const bgActive = document.querySelector('#bg-img > .bg-active') as HTMLImageElement || null;
-
-            if (nextBgActive && bgActive && nextBgActive !== bgActive) {
-              nextBgActive.classList.remove('hidden');
-              nextBgActive.classList.add('bg-active');
-
-              bgActive.classList.remove('bg-active');
-              bgActive.classList.add('hidden');
-            }
+            this.changeBgImage(lastEvent.image);
           }
         }
+      }
+    },
+    changeBgImage(imagePath: string) {
+      const nextBgActive = document.querySelector(`#bg-img > img[data-src='${imagePath}']`) as HTMLImageElement || null;
+      const bgActive = document.querySelector('#bg-img > .bg-active') as HTMLImageElement || null;
+
+      if (nextBgActive && bgActive && nextBgActive !== bgActive) {
+        nextBgActive.classList.remove('hidden');
+        nextBgActive.classList.add('bg-active');
+
+        bgActive.classList.remove('bg-active');
+        bgActive.classList.add('hidden');
       }
     },
     calculateTimelines(timecodeValue: string): TimelineType[] {

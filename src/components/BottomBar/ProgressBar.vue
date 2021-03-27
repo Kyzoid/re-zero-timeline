@@ -63,6 +63,9 @@ export default (Vue as VueConstructor<
       thumb: HTMLDivElement;
       hoverThumb: HTMLDivElement;
     };
+
+    toSeconds: Function;
+    toTimecode: Function;
   }
   >).extend({
   name: 'ProgressBar',
@@ -78,7 +81,7 @@ export default (Vue as VueConstructor<
   computed: {
     computedEpisodes(): EpisodeType[] {
       return this.episodes.map((episode) => {
-        const width = ((this as any).toSeconds(episode.length) / this.max) * 100;
+        const width = (this.toSeconds(episode.length) / this.max) * 100;
         return {
           ...episode,
           width,
@@ -112,7 +115,7 @@ export default (Vue as VueConstructor<
       const { width } = this.$refs.progressBar.getBoundingClientRect();
       const value = Math.round(((progressPosition + 6.5) / width) * this.max);
       this.$emit('play-progress-change', value);
-      this.$parent.$emit('update-timelines', (this as any).toTimecode(value));
+      this.$parent.$emit('update-timelines', this.toTimecode(value));
     },
     getChapters() {
       return Object.values(document.getElementsByClassName('chapter') as HTMLCollectionOf<HTMLDivElement>);
@@ -141,8 +144,8 @@ export default (Vue as VueConstructor<
             const prevEpisodeFound = this.episodes[episodeIndex - 1];
             const episodeStartAt = prevEpisodeFound ? prevEpisodeFound.endAt : '00:00:00';
             const timeElapsedInputValue = Math.round(((progressPosition + 6.5) / this.progressBarWidth) * this.max);
-            const episodeTimeElapsed = (this as any).toTimecode(
-              timeElapsedInputValue - (this as any).toSeconds(episodeStartAt),
+            const episodeTimeElapsed = this.toTimecode(
+              timeElapsedInputValue - this.toSeconds(episodeStartAt),
             );
 
             this.$refs.tooltipTimer.textContent = episodeTimeElapsed;

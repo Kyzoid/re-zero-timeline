@@ -43,6 +43,7 @@ export default (Vue as VueConstructor<
       totalTimeElapsed: HTMLSpanElement;
       timeElapsed: HTMLSpanElement;
     };
+    toTimecode: Function;
   }
   >).extend({
   name: 'BottomBar',
@@ -64,7 +65,7 @@ export default (Vue as VueConstructor<
     },
 
     updateTotalTimeElapsed(timeElapsedInputValue: number) {
-      const timeElapsedValue = (this as any).toTimecode(timeElapsedInputValue);
+      const timeElapsedValue = this.toTimecode(timeElapsedInputValue);
       this.$refs.totalTimeElapsed.textContent = timeElapsedValue;
     },
 
@@ -84,11 +85,11 @@ export default (Vue as VueConstructor<
       const episodeStartAt = prevEpisode ? prevEpisode.endAt : '00:00:00';
       const episodeEndAt = this.$data.episodes[episodeIndex].endAt;
 
-      const episodeLength = (this as any).toTimecode(
+      const episodeLength = this.toTimecode(
         this.toSeconds(episodeEndAt) - this.toSeconds(episodeStartAt),
       );
 
-      const episodeTimeElapsed = (this as any).toTimecode(
+      const episodeTimeElapsed = this.toTimecode(
         timeElapsedInputValue - this.toSeconds(episodeStartAt),
       );
 
