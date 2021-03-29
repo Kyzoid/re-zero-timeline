@@ -333,4 +333,8 @@ export default (Vue as VueConstructor<
 .timelines {
   height: calc(100vh - 91px);
 }
+
+#timeline-graph {
+  scrollbar-width: none;
+}
 </style>
