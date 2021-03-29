@@ -1,24 +1,26 @@
-# Re:Zero Timeline
+<h1 align="center">
+  <br />
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://i.imgur.com/6Logw57.png" alt="Re:Zero Timeline"></a>
+  Re:Zero Timeline
+</h1>
+<h4 align="center">A timeline based on Re:Zero's anime events.</h4>
 
-## Project setup
-```
-npm install
-```
+<p align="center"><img src="https://api.netlify.com/api/v1/badges/df2a63fc-65f0-4b14-9c89-a1c4c3d96004/deploy-status" /></p>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+<h2>Represented seasons</h2>
+<p>All events represented on the timeline are from the <a href="http://re-zero-anime.jp/">anime adaptation of Re:Zero</a>. See below the integration status for each seasons.</p>
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
+| Season            | Episodes |  Status |
+| -------------     | :------: | ----:   |
+| <a href="https://myanimelist.net/anime/31240/Re_Zero_kara_Hajimeru_Isekai_Seikatsu">Season 1</a>          |  25      |  ✔      |
+| <a href="https://myanimelist.net/anime/39587/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_2nd_Season">Season 2 Part I</a>  |  13      |  ✔      |
+| <a href="https://myanimelist.net/anime/42203/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_2nd_Season_Part_2">Season 2 Part II</a> |  12      |  ❌     |
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+> Note: Season 2 part II is now fully aired, it will be added in a couple of weeks.
+
+<h2>Contributing</h2>
+<p>Bug reports, code patches and timeline events additions are welcome.</p>
+
+<h2>License</h2>
+<a href="https://mit-license.org/">MIT</a>
