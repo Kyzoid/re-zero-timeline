@@ -5,11 +5,8 @@
 </h1>
 <h4 align="center">A timeline based on Re:Zero's anime events.</h4>
 
-<p align="center"><img src="https://api.netlify.com/api/v1/badges/df2a63fc-65f0-4b14-9c89-a1c4c3d96004/deploy-status" /></p>
-
-<h2>Represented seasons</h2>
-<p>All events represented on the timeline are from the <a href="http://re-zero-anime.jp/">anime adaptation of Re:Zero</a>. See below the integration status for each seasons.</p>
-
+<h2>Featured seasons</h2>
+<p>All events displayed on the timeline are from the <a href="http://re-zero-anime.jp/">anime adaptation of Re:Zero</a>. See below the integration status for each seasons.</p>
 
 | Season            | Episodes |  Status |
 | -------------     | :------: | ----:   |
