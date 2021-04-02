@@ -331,7 +331,19 @@ export default (Vue as VueConstructor<
 }
 
 .timelines {
-  height: calc(100vh - 91px);
+  height: calc(100vh - 59px);
+}
+
+@media (min-width: 768px) {
+  .timelines {
+    height: calc(100vh - 76px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .timelines {
+    height: calc(100vh - 86px);
+  }
 }
 
 #timeline-graph {

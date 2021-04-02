@@ -6,6 +6,7 @@
       <img
         src="/images/events/lowres/subaru-spawns-lugnica.png"
         data-src="/images/events/subaru-spawns-lugnica.png"
+        alt="subaru-spawns-lugnica"
         class="lazyload bg-active" />
     </div>
     <div id="bg-mask"></div>
@@ -119,6 +120,8 @@ export default (Vue as VueConstructor<
       const imgElement = document.createElement('img');
       imgElement.src = this.getLowResImagePath(imagePath);
       imgElement.dataset.src = imagePath;
+      const alt = imagePath.split('/').reverse()[0];
+      imgElement.alt = alt.slice(0, alt.length - 4);
       imgElement.classList.add('hidden', 'lazyload');
       bgImages.appendChild(imgElement);
     });
