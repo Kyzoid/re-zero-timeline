@@ -49,7 +49,7 @@ import Event from './Event.vue';
 import Timeline from './Timeline.vue';
 import TimelineJoint from './TimelineJoint.vue';
 import BottomBar from './BottomBar/BottomBar.vue';
-import { EventType, RespawnPointType, TimelineType } from './types';
+import { EventType, RespawnPointType, SeasonSeparatorType, TimelineType } from './types';
 
 import data from './data';
 
@@ -175,8 +175,12 @@ export default (Vue as VueConstructor<
       return timelines;
     },
 
-    calculteEvents(timeline: TimelineType, events: (EventType|RespawnPointType)[], timecodeValue: string): (EventType|RespawnPointType)[] {
-      const computedEvents: (EventType|RespawnPointType)[] = [];
+    calculteEvents(
+      timeline: TimelineType,
+      events: (EventType|RespawnPointType|SeasonSeparatorType)[],
+      timecodeValue: string,
+    ): (EventType|RespawnPointType|SeasonSeparatorType)[] {
+      const computedEvents: (EventType|RespawnPointType|SeasonSeparatorType)[] = [];
 
       events.forEach((event) => {
         if (this.toSeconds(event.absoluteTC) <= this.toSeconds(timecodeValue)) {
@@ -233,7 +237,7 @@ export default (Vue as VueConstructor<
         const timelineDOM: HTMLElement | null = document.querySelector(`[data-timeline-id='${timeline.id}']`);
         if (timelineDOM !== null) {
           const position = this.getTimelinePosition(timeline);
-          timelineDOM.style.marginLeft = `${position}px`;
+          timelineDOM.style.marginLeft = `${position + 40}px`;
         }
       });
     },
@@ -311,23 +315,19 @@ export default (Vue as VueConstructor<
 </script>
 
 <style lang="scss" scoped>
-::-webkit-scrollbar {
-  height: 0rem;
-  width: 0rem;
-}
 
-::-webkit-scrollbar-track {
-  background-color: #151a24;
+::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    background: rgba(0, 0, 0, 0.4);
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #2d3748;
+    background: rgba(255, 255, 255, 0.3);
 }
 
 ::-webkit-scrollbar-corner {
-  background: #151a24;
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .timelines {
@@ -346,7 +346,4 @@ export default (Vue as VueConstructor<
   }
 }
 
-#timeline-graph {
-  scrollbar-width: none;
-}
 </style>

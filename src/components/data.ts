@@ -11,6 +11,15 @@ export default {
       events: [
         {
           timeline: '1',
+          type: 'SeasonSeparator',
+          episode: '1A',
+          episodeRelativeTC: '0:00',
+          timecode: '0:00',
+          absoluteTC: '0:00',
+          description: 'Season 1',
+        },
+        {
+          timeline: '1',
           type: 'Event',
           episode: '1A',
           episodeRelativeTC: '2:00',
@@ -685,6 +694,15 @@ export default {
         },
         {
           timeline: '12',
+          type: 'SeasonSeparator',
+          episode: '26',
+          episodeRelativeTC: '0:00',
+          timecode: '51:55',
+          absoluteTC: '10:44:46',
+          description: 'Season 2 (Part I)',
+        },
+        {
+          timeline: '12',
           type: 'RespawnPoint',
           episode: '26',
           episodeRelativeTC: '3:55',
@@ -954,6 +972,15 @@ export default {
           absoluteTC: '16:22:29',
           description: 'Roswaal reveals that he is the one who hired the assassin attacking the mansion.',
           image: '/images/events/mad-roswaal.png',
+        },
+        {
+          timeline: '18',
+          type: 'SeasonSeparator',
+          episode: '38',
+          episodeRelativeTC: '27:00',
+          timecode: '54:04',
+          absoluteTC: '16:28:24',
+          description: 'Season 2 (Part II)',
         },
       ],
     },

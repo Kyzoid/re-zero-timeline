@@ -11,6 +11,7 @@
       </div>
     </div>
     <DeathIcon v-if="type === 'Death'" :id="eventId"/>
+    <SeasonSeparator v-if="type === 'SeasonSeparator'" :id="eventId" :description="description" />
     <RespawnPoint :data-complexity="complexity" v-if="type === 'RespawnPoint'" :id="eventId" />
   </div>
 </template>
@@ -23,6 +24,7 @@ import 'tippy.js/themes/translucent.css';
 import 'tippy.js/animations/shift-away.css';
 import DeathIcon from './DeathIcon.vue';
 import RespawnPoint from './RespawnPoint.vue';
+import SeasonSeparator from './SeasonSeparator.vue';
 import { EpisodeType } from './types';
 
 import data from './data';
@@ -42,6 +44,7 @@ export default (Vue as VueConstructor<
   components: {
     DeathIcon,
     RespawnPoint,
+    SeasonSeparator,
   },
   props: {
     type: String,
@@ -55,29 +58,31 @@ export default (Vue as VueConstructor<
     image: String,
   },
   mounted() {
-    const episodeFound: EpisodeType = this.$data.episodes.find((episode: EpisodeType) => episode.code === this.$props.episode);
-    tippy(`#${this.$props.eventId}`, {
-      content: `
-        <span class="font-bold">
-          Episode ${this.$props.episode} – ${episodeFound ? episodeFound.title : ''} (${this.$props.episodeRelativeTC})
-        </span>
-        <p class="py-1">${this.$props.description}</p>
-        <span>Type:
-          <span class="text-purple-300">
-            ${this.$props.type} ${this.$props.type === 'Death' ? '#' : ''}${this.$props.type === 'Death' ? this.$props.timeline : ''}
+    if (this.type !== 'SeasonSeparator') {
+      const episodeFound: EpisodeType = this.$data.episodes.find((episode: EpisodeType) => episode.code === this.$props.episode);
+      tippy(`#${this.$props.eventId}`, {
+        content: `
+          <span class="font-bold">
+            Episode ${this.$props.episode} – ${episodeFound ? episodeFound.title : ''} (${this.$props.episodeRelativeTC})
           </span>
-        </span>
-      `,
-      allowHTML: true,
-      arrow: true,
-      theme: 'translucent',
-      animation: 'shift-away',
-      onShow: () => {
-        if (this.$props.image) {
-          this.changeBgImage(this.$props.image);
-        }
-      },
-    });
+          <p class="py-1">${this.$props.description}</p>
+          <span>Type:
+            <span class="text-purple-300">
+              ${this.$props.type} ${this.$props.type === 'Death' ? '#' : ''}${this.$props.type === 'Death' ? this.$props.timeline : ''}
+            </span>
+          </span>
+        `,
+        allowHTML: true,
+        arrow: true,
+        theme: 'translucent',
+        animation: 'shift-away',
+        onShow: () => {
+          if (this.$props.image) {
+            this.changeBgImage(this.$props.image);
+          }
+        },
+      });
+    }
   },
   methods: {
     showTooltip({ target }: { target: HTMLElement }) {

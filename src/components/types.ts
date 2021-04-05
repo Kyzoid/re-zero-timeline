@@ -11,6 +11,18 @@ export type EventType = {
   image?: string;
 }
 
+export type SeasonSeparatorType = {
+  timeline: string;
+  type: string;
+  episode: string;
+  episodeRelativeTC: string;
+  timecode: string;
+  absoluteTC: string;
+  description: string;
+  position?: string;
+  image?: string;
+}
+
 export type RespawnPointType = {
   timeline: string;
   type: string;
@@ -33,7 +45,7 @@ export type TimelineType = {
   endAt: string;
   duration?: number;
   width?: string;
-  events: (EventType | RespawnPointType)[];
+  events: (EventType | RespawnPointType | SeasonSeparatorType)[];
 }
 
 export type EpisodeType = {
