@@ -16,7 +16,7 @@ export default Vue.extend({
 </script>
 <style lang="scss" scoped>
 .season-separator {
-    height: 50rem;
+    height: 25rem;
     background-image: repeating-linear-gradient(180deg, transparent, transparent 5px, #F87171 5px, #F87171 10px);
     span {
         top: 25%;

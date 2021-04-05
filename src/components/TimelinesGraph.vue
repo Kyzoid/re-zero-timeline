@@ -235,9 +235,10 @@ export default (Vue as VueConstructor<
     positionTimelines() {
       this.timelines.forEach((timeline: TimelineType) => {
         const timelineDOM: HTMLElement | null = document.querySelector(`[data-timeline-id='${timeline.id}']`);
+
         if (timelineDOM !== null) {
           const position = this.getTimelinePosition(timeline);
-          timelineDOM.style.marginLeft = `${position + 40}px`;
+          timelineDOM.style.marginLeft = timeline.id === 1 ? `${position + 40}px` : `${position}px`;
         }
       });
     },
