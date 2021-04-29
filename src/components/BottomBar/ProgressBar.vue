@@ -16,7 +16,7 @@
             @mousemove="handleMove"
             @click="handleClick"
             :data-id="episode.id"
-            :style="`width:${episode.width}%; margin-right: ${episode.id !== 39 ? '2px' : '0px'};`"
+            :style="`width:${episode.width}%; margin-right: ${episode.id !== 51 ? '2px' : '0px'};`"
           >
             <div
               class="play-progress z-20 absolute left-0 h-full bg-rz-logo-100 pointer-events-none"

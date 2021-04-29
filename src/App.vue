@@ -1,13 +1,12 @@
 <template>
-  <div id="app"
-    class="h-full"
-  >
+  <div id="app" class="h-full">
     <div id="bg-img" ref="bgImages">
       <img
         src="/images/events/lowres/subaru-spawns-lugnica.png"
         data-src="/images/events/subaru-spawns-lugnica.png"
         alt="subaru-spawns-lugnica"
-        class="lazyload bg-active" />
+        class="lazyload bg-active"
+      />
     </div>
     <div id="bg-mask"></div>
     <router-view name="header" />
@@ -108,6 +107,25 @@ export default (Vue as VueConstructor<
       '/images/events/village-overview.png',
       '/images/events/willhem-kills-betelgeuse.png',
 
+      // S2P2
+      '/images/events/elsa-dies.png',
+      '/images/events/emilia-meets-minerva.png',
+      '/images/events/emilia-passes-second-step.png',
+      '/images/events/emilia-passes-third-step.png',
+      '/images/events/emilia-retries-second-step.png',
+      '/images/events/emilia-tries-third-step.png',
+      '/images/events/great-rabbit-appears.png',
+      '/images/events/great-rabbit-killed.png',
+      '/images/events/invisible-providence.png',
+      '/images/events/puck-breaks-contract.png',
+      '/images/events/ram-puck-start-fight-against-roswaal.png',
+      '/images/events/roswaal-blows-up-ram.png',
+      '/images/events/subaru-becomes-emilias-knight.png',
+      '/images/events/subaru-consoles-emilia.png',
+      '/images/events/subaru-garfiel-arrive-at-mansion.png',
+      '/images/events/subaru-kisses-emilia.png',
+      '/images/events/subaru-saves-beatrice-from-fire.png',
+
       '/images/respawns/respawn-1.png',
       '/images/respawns/respawn-2.png',
       '/images/respawns/respawn-3.png',
@@ -137,32 +155,34 @@ export default (Vue as VueConstructor<
 </script>
 
 <style lang="postcss">
-  input[type="range"]::-webkit-slider-thumb {
-    background-color: red;
-  }
+input[type='range']::-webkit-slider-thumb {
+  background-color: red;
+}
 
-  input[type=range]:focus {
-    outline: none;
-  }
+input[type='range']:focus {
+  outline: none;
+}
 
-  input[type=range]::-webkit-slider-runnable-track {}
+input[type='range']::-webkit-slider-runnable-track {
+}
 
-  html {
-    font-family: Roboto !important;
-  }
+html {
+  font-family: Roboto !important;
+}
 
-  html, body {
-    user-select: none;
-  }
+html,
+body {
+  user-select: none;
+}
 
-  #app > #bg-img > img {
-    opacity: .4;
-    @apply top-0 left-0 h-full w-full object-cover fixed;
-  }
+#app > #bg-img > img {
+  opacity: 0.4;
+  @apply top-0 left-0 h-full w-full object-cover fixed;
+}
 
-  #app > #bg-mask {
-    opacity: 1;
-    background-image: url('/images/bg-mask.png');
-    @apply top-0 left-0 h-full w-full bg-repeat fixed;
-  }
+#app > #bg-mask {
+  opacity: 1;
+  background-image: url('/images/bg-mask.png');
+  @apply top-0 left-0 h-full w-full bg-repeat fixed;
+}
 </style>

@@ -19,7 +19,7 @@
       </div>
       <div class="flex">
         <div class="flex">
-          <span ref="totalTimeElapsed">00:00:00</span> / <span>16:28:24</span>
+          <span ref="totalTimeElapsed">00:00:00</span> / <span>22:18:24</span>
         </div>
         <!-- <Settings /> -->
       </div>
@@ -54,7 +54,7 @@ export default (Vue as VueConstructor<
   data: () => ({
     isMouseDown: false,
     timecode: 0,
-    lengthInSeconds: 59304,
+    lengthInSeconds: 80304,
     episodes: data.episodes,
   }),
   inject: ['toTimecode'],

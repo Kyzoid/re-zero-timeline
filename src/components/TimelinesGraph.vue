@@ -71,7 +71,7 @@ export default (Vue as VueConstructor<
     document.addEventListener('mouseup', this.handleMouseUp);
   },
   data: () => ({
-    ratio: 5, // represents the number of seconds for 1px
+    ratio: 6, // represents the number of seconds for 1px
     timelines: data.timelines,
     calculatedTimelines: [],
     isDrawing: false,
@@ -291,7 +291,7 @@ export default (Vue as VueConstructor<
 
   computed: {
     computedTimelines(): TimelineType[] {
-      return this.calculateTimelines('16:28:24');
+      return this.calculateTimelines('22:18:24');
     },
   },
   updated() {
